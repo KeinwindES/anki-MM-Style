@@ -151,10 +151,13 @@
                 }
             } while (match)
 
+            // Reset regex state to prevent issues with global regex
+            syntax_re.lastIndex = 0
+
             if (last_idx < text.length) {
                 ret.push({
                     type: 'plain',
-                    text: text.substr(last_idx)
+                    text: text.substring(last_idx)
                 })
             }
 
@@ -171,7 +174,9 @@
 
                 const audio_play_word = syntax_element.text
                 word_container.addEventListener('click', function () {
-                    pycmd('play_audio-' + audio_play_word)
+                    if (typeof pycmd !== 'undefined') {
+                        pycmd('play_audio-' + audio_play_word)
+                    }
                 })
 
                 const text_elem = document.createElement('span')
@@ -266,34 +271,111 @@
         }
 
         function getTargetWordText() {
+            // First try to get from target word field (vocabulary cards)
             const targetWordField = document.querySelector('[data-field-type="target-word"]')
-            console.log('Target word field found:', targetWordField)
-            if (!targetWordField) return null
+            if (targetWordField) {
+                const text = targetWordField.textContent || targetWordField.innerText || ''
+                const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
+                if (cleanText) return cleanText
+            }
 
-            // Get the plain text content without syntax markup
-            const text = targetWordField.textContent || targetWordField.innerText || ''
-            const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
-            console.log('Target word text:', cleanText)
-            return cleanText
+            // For sentence cards, try to extract from the Target Word field content
+            // Look for any element containing target word data
+            const targetWordElements = document.querySelectorAll('.migaku-card-unknown .field')
+            for (const element of targetWordElements) {
+                const text = element.textContent || element.innerText || ''
+                const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
+                if (cleanText && cleanText.length > 0) {
+                    return cleanText
+                }
+            }
+
+            // Try to get from card type detection and extract from available fields
+            const cardTypeForm = document.querySelector('.migaku-typeselect form')
+            if (cardTypeForm) {
+                const cardType = cardTypeForm.elements["type"].value
+
+                // For sentence cards, check if there's a target word in the unknown field
+                if (cardType === 's' || cardType === 'as') {
+                    // Look for target word in the unknown section
+                    const unknownField = document.querySelector('.migaku-card-unknown .field')
+                    if (unknownField) {
+                        const text = unknownField.textContent || unknownField.innerText || ''
+                        const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
+                        if (cleanText && cleanText.length > 0) {
+                            return cleanText
+                        }
+                    }
+                }
+            }
+
+            // Alternative approach: check for any bold or emphasized text that might be target word
+            const boldElements = document.querySelectorAll('b, strong, em, i')
+            for (const element of boldElements) {
+                const text = element.textContent || element.innerText || ''
+                const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
+                if (cleanText && cleanText.length > 1 && cleanText.length < 50) {
+                    return cleanText
+                }
+            }
+
+            return null
         }
 
         function markTargetWordsInSentence() {
             const targetWordText = getTargetWordText()
-            console.log('Starting target word marking, target text:', targetWordText)
             if (!targetWordText) return
 
+            // Get all sentence fields but exclude the target word field itself
             const sentenceFields = document.querySelectorAll('.field:not([data-field-type="target-word"])')
-            console.log('Found sentence fields:', sentenceFields.length)
 
             sentenceFields.forEach(field => {
                 const words = field.querySelectorAll('.word')
-                console.log('Found words in field:', words.length)
                 words.forEach(word => {
                     const wordText = word.querySelector('.word-text')
                     if (wordText) {
-                        console.log('Checking word:', wordText.textContent, 'against target:', targetWordText)
-                        if (wordText.textContent.toLowerCase() === targetWordText.toLowerCase()) {
-                            console.log('MATCH! Adding target-word-highlight class')
+                        // More flexible matching - check if target word is contained in the word
+                        const wordContent = wordText.textContent.toLowerCase().trim()
+                        const targetContent = targetWordText.toLowerCase().trim()
+
+                        // Split target word by spaces to handle multi-word targets
+                        const targetWords = targetContent.split(/\s+/)
+
+                        // Check for exact match or partial match
+                        let isMatch = false
+
+                        // Exact match
+                        if (wordContent === targetContent) {
+                            isMatch = true
+                        }
+
+                        // Check each word in target phrase
+                        targetWords.forEach(targetWord => {
+                            if (targetWord.length > 2) {
+                                if (wordContent === targetWord ||
+                                    (wordContent.includes(targetWord) && targetWord.length > 2) ||
+                                    (targetWord.includes(wordContent) && wordContent.length > 2)) {
+                                    isMatch = true
+                                }
+                            }
+                        })
+
+                        // For German, also check without case endings
+                        if (!isMatch && targetContent.length > 3) {
+                            // Remove common German endings for better matching
+                            const germanWordStem = wordContent.replace(/(en|er|es|e|n|s)$/, '')
+                            const targetStem = targetContent.replace(/(en|er|es|e|n|s)$/, '')
+
+                            if (germanWordStem.length > 2 && targetStem.length > 2) {
+                                if (germanWordStem === targetStem ||
+                                    (germanWordStem.includes(targetStem) && targetStem.length > 2) ||
+                                    (targetStem.includes(germanWordStem) && germanWordStem.length > 2)) {
+                                    isMatch = true
+                                }
+                            }
+                        }
+
+                        if (isMatch) {
                             wordText.classList.add('target-word-highlight')
                         }
                     }
@@ -305,14 +387,12 @@
 
 
         const fields = document.querySelectorAll('.field')
-        console.log('Found fields to process:', fields.length)
 
         for (field of fields) {
             handleField(field)
         }
 
         // Mark target words after all fields are processed
-        console.log('Processing complete, marking target words...')
         markTargetWordsInSentence()
 
         function closeAllActive() {

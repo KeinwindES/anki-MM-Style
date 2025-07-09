@@ -401,6 +401,11 @@ t {
     padding-right: 15px;
 }
 
+.ankidroid_dark_mode .word-pos,
+.nightMode .word-pos {
+    color: #b0b0b0;
+}
+
 .word-gender-symbol-m::before {
     content: "\2642";
     color: #00a2ff;
@@ -421,9 +426,34 @@ t {
     color: #ac80ff;
 }
 
+.ankidroid_dark_mode .word-gender-symbol-m::before,
+.nightMode .word-gender-symbol-m::before {
+    color: #4dc3ff;
+}
+
+.ankidroid_dark_mode .word-gender-symbol-f::before,
+.nightMode .word-gender-symbol-f::before {
+    color: #ff8fc7;
+}
+
+.ankidroid_dark_mode .word-gender-symbol-n::before,
+.nightMode .word-gender-symbol-n::before {
+    color: #a0a0a0;
+}
+
+.ankidroid_dark_mode .word-gender-symbol-x::before,
+.nightMode .word-gender-symbol-x::before {
+    color: #c49aff;
+}
+
 .dict-form {
     margin-top: 5px;
     font-size: 25px;
+}
+
+.ankidroid_dark_mode .dict-form,
+.nightMode .dict-form {
+    color: #ffffff;
 }
 
 /* Gender color coding - comprehensive selectors */
@@ -558,30 +588,194 @@ span.gender-hover-v,
 /* Dark mode gender colors */
 .ankidroid_dark_mode .gender-m,
 .ankidroid_dark_mode .gender-hover-m,
+.ankidroid_dark_mode .card .gender-m,
+.ankidroid_dark_mode .card .gender-hover-m,
+.ankidroid_dark_mode .card * .gender-m,
+.ankidroid_dark_mode .card * .gender-hover-m,
+.ankidroid_dark_mode .migaku-card .gender-m,
+.ankidroid_dark_mode .migaku-card .gender-hover-m,
+.ankidroid_dark_mode .migaku-card * .gender-m,
+.ankidroid_dark_mode .migaku-card * .gender-hover-m,
+.ankidroid_dark_mode .migaku-card-content .gender-m,
+.ankidroid_dark_mode .migaku-card-content .gender-hover-m,
+.ankidroid_dark_mode .migaku-card-content * .gender-m,
+.ankidroid_dark_mode .migaku-card-content * .gender-hover-m,
+.ankidroid_dark_mode main.container .card .gender-m,
+.ankidroid_dark_mode main.container .card .gender-hover-m,
+.ankidroid_dark_mode main.container .card * .gender-m,
+.ankidroid_dark_mode main.container .card * .gender-hover-m,
+.ankidroid_dark_mode span.gender-m,
+.ankidroid_dark_mode span.gender-hover-m,
+.ankidroid_dark_mode .word-text.gender-m,
+.ankidroid_dark_mode .word-text.gender-hover-m,
 .nightMode .gender-m,
-.nightMode .gender-hover-m {
+.nightMode .gender-hover-m,
+.nightMode .card .gender-m,
+.nightMode .card .gender-hover-m,
+.nightMode .card * .gender-m,
+.nightMode .card * .gender-hover-m,
+.nightMode .migaku-card .gender-m,
+.nightMode .migaku-card .gender-hover-m,
+.nightMode .migaku-card * .gender-m,
+.nightMode .migaku-card * .gender-hover-m,
+.nightMode .migaku-card-content .gender-m,
+.nightMode .migaku-card-content .gender-hover-m,
+.nightMode .migaku-card-content * .gender-m,
+.nightMode .migaku-card-content * .gender-hover-m,
+.nightMode main.container .card .gender-m,
+.nightMode main.container .card .gender-hover-m,
+.nightMode main.container .card * .gender-m,
+.nightMode main.container .card * .gender-hover-m,
+.nightMode span.gender-m,
+.nightMode span.gender-hover-m,
+.nightMode .word-text.gender-m,
+.nightMode .word-text.gender-hover-m {
     color: #4dc3ff !important;
+    text-shadow: 0 0 1px #4dc3ff;
 }
 
 .ankidroid_dark_mode .gender-f,
 .ankidroid_dark_mode .gender-hover-f,
+.ankidroid_dark_mode .card .gender-f,
+.ankidroid_dark_mode .card .gender-hover-f,
+.ankidroid_dark_mode .card * .gender-f,
+.ankidroid_dark_mode .card * .gender-hover-f,
+.ankidroid_dark_mode .migaku-card .gender-f,
+.ankidroid_dark_mode .migaku-card .gender-hover-f,
+.ankidroid_dark_mode .migaku-card * .gender-f,
+.ankidroid_dark_mode .migaku-card * .gender-hover-f,
+.ankidroid_dark_mode .migaku-card-content .gender-f,
+.ankidroid_dark_mode .migaku-card-content .gender-hover-f,
+.ankidroid_dark_mode .migaku-card-content * .gender-f,
+.ankidroid_dark_mode .migaku-card-content * .gender-hover-f,
+.ankidroid_dark_mode main.container .card .gender-f,
+.ankidroid_dark_mode main.container .card .gender-hover-f,
+.ankidroid_dark_mode main.container .card * .gender-f,
+.ankidroid_dark_mode main.container .card * .gender-hover-f,
+.ankidroid_dark_mode span.gender-f,
+.ankidroid_dark_mode span.gender-hover-f,
+.ankidroid_dark_mode .word-text.gender-f,
+.ankidroid_dark_mode .word-text.gender-hover-f,
 .nightMode .gender-f,
-.nightMode .gender-hover-f {
+.nightMode .gender-hover-f,
+.nightMode .card .gender-f,
+.nightMode .card .gender-hover-f,
+.nightMode .card * .gender-f,
+.nightMode .card * .gender-hover-f,
+.nightMode .migaku-card .gender-f,
+.nightMode .migaku-card .gender-hover-f,
+.nightMode .migaku-card * .gender-f,
+.nightMode .migaku-card * .gender-hover-f,
+.nightMode .migaku-card-content .gender-f,
+.nightMode .migaku-card-content .gender-hover-f,
+.nightMode .migaku-card-content * .gender-f,
+.nightMode .migaku-card-content * .gender-hover-f,
+.nightMode main.container .card .gender-f,
+.nightMode main.container .card .gender-hover-f,
+.nightMode main.container .card * .gender-f,
+.nightMode main.container .card * .gender-hover-f,
+.nightMode span.gender-f,
+.nightMode span.gender-hover-f,
+.nightMode .word-text.gender-f,
+.nightMode .word-text.gender-hover-f {
     color: #ff8fc7 !important;
+    text-shadow: 0 0 1px #ff8fc7;
 }
 
 .ankidroid_dark_mode .gender-n,
 .ankidroid_dark_mode .gender-hover-n,
+.ankidroid_dark_mode .card .gender-n,
+.ankidroid_dark_mode .card .gender-hover-n,
+.ankidroid_dark_mode .card * .gender-n,
+.ankidroid_dark_mode .card * .gender-hover-n,
+.ankidroid_dark_mode .migaku-card .gender-n,
+.ankidroid_dark_mode .migaku-card .gender-hover-n,
+.ankidroid_dark_mode .migaku-card * .gender-n,
+.ankidroid_dark_mode .migaku-card * .gender-hover-n,
+.ankidroid_dark_mode .migaku-card-content .gender-n,
+.ankidroid_dark_mode .migaku-card-content .gender-hover-n,
+.ankidroid_dark_mode .migaku-card-content * .gender-n,
+.ankidroid_dark_mode .migaku-card-content * .gender-hover-n,
+.ankidroid_dark_mode main.container .card .gender-n,
+.ankidroid_dark_mode main.container .card .gender-hover-n,
+.ankidroid_dark_mode main.container .card * .gender-n,
+.ankidroid_dark_mode main.container .card * .gender-hover-n,
+.ankidroid_dark_mode span.gender-n,
+.ankidroid_dark_mode span.gender-hover-n,
+.ankidroid_dark_mode .word-text.gender-n,
+.ankidroid_dark_mode .word-text.gender-hover-n,
 .nightMode .gender-n,
-.nightMode .gender-hover-n {
+.nightMode .gender-hover-n,
+.nightMode .card .gender-n,
+.nightMode .card .gender-hover-n,
+.nightMode .card * .gender-n,
+.nightMode .card * .gender-hover-n,
+.nightMode .migaku-card .gender-n,
+.nightMode .migaku-card .gender-hover-n,
+.nightMode .migaku-card * .gender-n,
+.nightMode .migaku-card * .gender-hover-n,
+.nightMode .migaku-card-content .gender-n,
+.nightMode .migaku-card-content .gender-hover-n,
+.nightMode .migaku-card-content * .gender-n,
+.nightMode .migaku-card-content * .gender-hover-n,
+.nightMode main.container .card .gender-n,
+.nightMode main.container .card .gender-hover-n,
+.nightMode main.container .card * .gender-n,
+.nightMode main.container .card * .gender-hover-n,
+.nightMode span.gender-n,
+.nightMode span.gender-hover-n,
+.nightMode .word-text.gender-n,
+.nightMode .word-text.gender-hover-n {
     color: #a0a0a0 !important;
+    text-shadow: 0 0 1px #a0a0a0;
 }
 
 .ankidroid_dark_mode .gender-v,
 .ankidroid_dark_mode .gender-hover-v,
+.ankidroid_dark_mode .card .gender-v,
+.ankidroid_dark_mode .card .gender-hover-v,
+.ankidroid_dark_mode .card * .gender-v,
+.ankidroid_dark_mode .card * .gender-hover-v,
+.ankidroid_dark_mode .migaku-card .gender-v,
+.ankidroid_dark_mode .migaku-card .gender-hover-v,
+.ankidroid_dark_mode .migaku-card * .gender-v,
+.ankidroid_dark_mode .migaku-card * .gender-hover-v,
+.ankidroid_dark_mode .migaku-card-content .gender-v,
+.ankidroid_dark_mode .migaku-card-content .gender-hover-v,
+.ankidroid_dark_mode .migaku-card-content * .gender-v,
+.ankidroid_dark_mode .migaku-card-content * .gender-hover-v,
+.ankidroid_dark_mode main.container .card .gender-v,
+.ankidroid_dark_mode main.container .card .gender-hover-v,
+.ankidroid_dark_mode main.container .card * .gender-v,
+.ankidroid_dark_mode main.container .card * .gender-hover-v,
+.ankidroid_dark_mode span.gender-v,
+.ankidroid_dark_mode span.gender-hover-v,
+.ankidroid_dark_mode .word-text.gender-v,
+.ankidroid_dark_mode .word-text.gender-hover-v,
 .nightMode .gender-v,
-.nightMode .gender-hover-v {
+.nightMode .gender-hover-v,
+.nightMode .card .gender-v,
+.nightMode .card .gender-hover-v,
+.nightMode .card * .gender-v,
+.nightMode .card * .gender-hover-v,
+.nightMode .migaku-card .gender-v,
+.nightMode .migaku-card .gender-hover-v,
+.nightMode .migaku-card * .gender-v,
+.nightMode .migaku-card * .gender-hover-v,
+.nightMode .migaku-card-content .gender-v,
+.nightMode .migaku-card-content .gender-hover-v,
+.nightMode .migaku-card-content * .gender-v,
+.nightMode .migaku-card-content * .gender-hover-v,
+.nightMode main.container .card .gender-v,
+.nightMode main.container .card .gender-hover-v,
+.nightMode main.container .card * .gender-v,
+.nightMode main.container .card * .gender-hover-v,
+.nightMode span.gender-v,
+.nightMode span.gender-hover-v,
+.nightMode .word-text.gender-v,
+.nightMode .word-text.gender-hover-v {
     color: #bb7ae6 !important;
+    text-shadow: 0 0 1px #bb7ae6;
 }
 
 /* Dark mode copyright */
@@ -622,9 +816,50 @@ span.gender-hover-missing,
 /* Dark mode green color for missing gender */
 .ankidroid_dark_mode .gender-missing,
 .ankidroid_dark_mode .gender-hover-missing,
+.ankidroid_dark_mode .card .gender-missing,
+.ankidroid_dark_mode .card .gender-hover-missing,
+.ankidroid_dark_mode .card * .gender-missing,
+.ankidroid_dark_mode .card * .gender-hover-missing,
+.ankidroid_dark_mode .migaku-card .gender-missing,
+.ankidroid_dark_mode .migaku-card .gender-hover-missing,
+.ankidroid_dark_mode .migaku-card * .gender-missing,
+.ankidroid_dark_mode .migaku-card * .gender-hover-missing,
+.ankidroid_dark_mode .migaku-card-content .gender-missing,
+.ankidroid_dark_mode .migaku-card-content .gender-hover-missing,
+.ankidroid_dark_mode .migaku-card-content * .gender-missing,
+.ankidroid_dark_mode .migaku-card-content * .gender-hover-missing,
+.ankidroid_dark_mode main.container .card .gender-missing,
+.ankidroid_dark_mode main.container .card .gender-hover-missing,
+.ankidroid_dark_mode main.container .card * .gender-missing,
+.ankidroid_dark_mode main.container .card * .gender-hover-missing,
+.ankidroid_dark_mode span.gender-missing,
+.ankidroid_dark_mode span.gender-hover-missing,
+.ankidroid_dark_mode .word-text.gender-missing,
+.ankidroid_dark_mode .word-text.gender-hover-missing,
 .nightMode .gender-missing,
-.nightMode .gender-hover-missing {
+.nightMode .gender-hover-missing,
+.nightMode .card .gender-missing,
+.nightMode .card .gender-hover-missing,
+.nightMode .card * .gender-missing,
+.nightMode .card * .gender-hover-missing,
+.nightMode .migaku-card .gender-missing,
+.nightMode .migaku-card .gender-hover-missing,
+.nightMode .migaku-card * .gender-missing,
+.nightMode .migaku-card * .gender-hover-missing,
+.nightMode .migaku-card-content .gender-missing,
+.nightMode .migaku-card-content .gender-hover-missing,
+.nightMode .migaku-card-content * .gender-missing,
+.nightMode .migaku-card-content * .gender-hover-missing,
+.nightMode main.container .card .gender-missing,
+.nightMode main.container .card .gender-hover-missing,
+.nightMode main.container .card * .gender-missing,
+.nightMode main.container .card * .gender-hover-missing,
+.nightMode span.gender-missing,
+.nightMode span.gender-hover-missing,
+.nightMode .word-text.gender-missing,
+.nightMode .word-text.gender-hover-missing {
     color: #5cb85c !important;
+    text-shadow: 0 0 1px #5cb85c;
 }
 
 /* Target word highlighting */
@@ -651,10 +886,22 @@ span.target-word-highlight,
 .ankidroid_dark_mode .card * .target-word-highlight,
 .ankidroid_dark_mode .migaku-card .target-word-highlight,
 .ankidroid_dark_mode .migaku-card * .target-word-highlight,
+.ankidroid_dark_mode .migaku-card-content .target-word-highlight,
+.ankidroid_dark_mode .migaku-card-content * .target-word-highlight,
+.ankidroid_dark_mode main.container .card .target-word-highlight,
+.ankidroid_dark_mode main.container .card * .target-word-highlight,
+.ankidroid_dark_mode span.target-word-highlight,
+.ankidroid_dark_mode .word-text.target-word-highlight,
 .nightMode .target-word-highlight,
 .nightMode .card .target-word-highlight,
 .nightMode .card * .target-word-highlight,
 .nightMode .migaku-card .target-word-highlight,
-.nightMode .migaku-card * .target-word-highlight {
+.nightMode .migaku-card * .target-word-highlight,
+.nightMode .migaku-card-content .target-word-highlight,
+.nightMode .migaku-card-content * .target-word-highlight,
+.nightMode main.container .card .target-word-highlight,
+.nightMode main.container .card * .target-word-highlight,
+.nightMode span.target-word-highlight,
+.nightMode .word-text.target-word-highlight {
     background-color: rgba(255, 255, 0, 0.15) !important;
 }

@@ -95,10 +95,13 @@
                 }
             } while (match)
 
+            // Reset regex state to prevent issues with global regex
+            syntax_re.lastIndex = 0
+
             if (last_idx < text.length) {
                 ret.push({
                     type: 'plain',
-                    text: text.substr(last_idx)
+                    text: text.substring(last_idx)
                 })
             }
 
@@ -115,7 +118,9 @@
 
                 const audio_play_word = syntax_element.text
                 word_container.addEventListener('click', function () {
-                    pycmd('play_audio-' + audio_play_word)
+                    if (typeof pycmd !== 'undefined') {
+                        pycmd('play_audio-' + audio_play_word)
+                    }
                 })
 
                 const text_elem = document.createElement('span')
@@ -208,34 +213,46 @@
         }
 
         function getTargetWordText() {
+            // First try to get from target word field (vocabulary cards)
             const targetWordField = document.querySelector('[data-field-type="target-word"]')
-            console.log('Target word field found:', targetWordField)
-            if (!targetWordField) return null
+            if (targetWordField) {
+                const text = targetWordField.textContent || targetWordField.innerText || ''
+                const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
+                if (cleanText) return cleanText
+            }
 
-            // Get the plain text content without syntax markup
-            const text = targetWordField.textContent || targetWordField.innerText || ''
-            const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
-            console.log('Target word text:', cleanText)
-            return cleanText
+            // For sentence cards, try to get from the card type detection
+            // Check if this is a vocabulary card type
+            const cardTypeForm = document.querySelector('.migaku-typeselect form')
+            if (cardTypeForm) {
+                const cardType = cardTypeForm.elements["type"].value
+                if (cardType === 'v' || cardType === 'av') {
+                    // This is a vocabulary card, target word should be available
+                    return null
+                }
+            }
+
+            // For sentence cards, we can't determine target word from front side
+            return null
         }
 
         function markTargetWordsInSentence() {
             const targetWordText = getTargetWordText()
-            console.log('Starting target word marking, target text:', targetWordText)
             if (!targetWordText) return
 
             const sentenceFields = document.querySelectorAll('.field:not([data-field-type="target-word"])')
-            console.log('Found sentence fields:', sentenceFields.length)
 
             sentenceFields.forEach(field => {
                 const words = field.querySelectorAll('.word')
-                console.log('Found words in field:', words.length)
                 words.forEach(word => {
                     const wordText = word.querySelector('.word-text')
                     if (wordText) {
-                        console.log('Checking word:', wordText.textContent, 'against target:', targetWordText)
-                        if (wordText.textContent.toLowerCase() === targetWordText.toLowerCase()) {
-                            console.log('MATCH! Adding target-word-highlight class')
+                        // More flexible matching - check if target word is contained in the word
+                        const wordContent = wordText.textContent.toLowerCase().trim()
+                        const targetContent = targetWordText.toLowerCase().trim()
+
+                        if (wordContent === targetContent ||
+                            (wordContent.includes(targetContent) && targetContent.length > 2)) {
                             wordText.classList.add('target-word-highlight')
                         }
                     }
@@ -244,14 +261,12 @@
         }
 
         const fields = document.querySelectorAll('.field')
-        console.log('Found fields to process:', fields.length)
 
         for (field of fields) {
             handleField(field)
         }
 
         // Mark target words after all fields are processed
-        console.log('Processing complete, marking target words...')
         markTargetWordsInSentence()
 
 
