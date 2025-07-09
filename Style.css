@@ -628,14 +628,33 @@ span.gender-hover-missing,
 }
 
 /* Target word highlighting */
-.target-word-highlight {
+.target-word-highlight,
+.card .target-word-highlight,
+.card * .target-word-highlight,
+.migaku-card .target-word-highlight,
+.migaku-card * .target-word-highlight,
+.migaku-card-content .target-word-highlight,
+.migaku-card-content * .target-word-highlight,
+main.container .card .target-word-highlight,
+main.container .card * .target-word-highlight,
+span.target-word-highlight,
+.word-text.target-word-highlight {
     font-style: italic !important;
+    font-weight: normal !important;
     background-color: rgba(255, 255, 0, 0.2) !important;
     border-radius: 3px;
     padding: 1px 2px;
 }
 
 .ankidroid_dark_mode .target-word-highlight,
-.nightMode .target-word-highlight {
+.ankidroid_dark_mode .card .target-word-highlight,
+.ankidroid_dark_mode .card * .target-word-highlight,
+.ankidroid_dark_mode .migaku-card .target-word-highlight,
+.ankidroid_dark_mode .migaku-card * .target-word-highlight,
+.nightMode .target-word-highlight,
+.nightMode .card .target-word-highlight,
+.nightMode .card * .target-word-highlight,
+.nightMode .migaku-card .target-word-highlight,
+.nightMode .migaku-card * .target-word-highlight {
     background-color: rgba(255, 255, 0, 0.15) !important;
 }

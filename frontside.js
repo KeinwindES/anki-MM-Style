@@ -209,37 +209,49 @@
 
         function getTargetWordText() {
             const targetWordField = document.querySelector('[data-field-type="target-word"]')
+            console.log('Target word field found:', targetWordField)
             if (!targetWordField) return null
 
             // Get the plain text content without syntax markup
             const text = targetWordField.textContent || targetWordField.innerText || ''
-            return text.replace(/\[(.*?)\]/g, '').trim()
+            const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
+            console.log('Target word text:', cleanText)
+            return cleanText
         }
 
         function markTargetWordsInSentence() {
             const targetWordText = getTargetWordText()
+            console.log('Starting target word marking, target text:', targetWordText)
             if (!targetWordText) return
 
             const sentenceFields = document.querySelectorAll('.field:not([data-field-type="target-word"])')
+            console.log('Found sentence fields:', sentenceFields.length)
 
             sentenceFields.forEach(field => {
                 const words = field.querySelectorAll('.word')
+                console.log('Found words in field:', words.length)
                 words.forEach(word => {
                     const wordText = word.querySelector('.word-text')
-                    if (wordText && wordText.textContent.toLowerCase() === targetWordText.toLowerCase()) {
-                        wordText.classList.add('target-word-highlight')
+                    if (wordText) {
+                        console.log('Checking word:', wordText.textContent, 'against target:', targetWordText)
+                        if (wordText.textContent.toLowerCase() === targetWordText.toLowerCase()) {
+                            console.log('MATCH! Adding target-word-highlight class')
+                            wordText.classList.add('target-word-highlight')
+                        }
                     }
                 })
             })
         }
 
         const fields = document.querySelectorAll('.field')
+        console.log('Found fields to process:', fields.length)
 
         for (field of fields) {
             handleField(field)
         }
 
         // Mark target words after all fields are processed
+        console.log('Processing complete, marking target words...')
         markTargetWordsInSentence()
 
 
