@@ -431,32 +431,26 @@
         const wordElements = document.querySelectorAll('.word')
         const isMobileDevice = typeof (pycmd) === typeof (undefined)
 
-        for (const wordElement of wordElements) {
-            if (isMobileDevice) {
-                // Mobile: use tap to toggle popups
-                wordElement.addEventListener('click', handleTapToggle)
-                wordElement.classList.add('tappable')
+        for (const wordElement of word_elements) {
+            if (is_mobile) {
+                elem.addEventListener('click', on_activeToggle)
+                elem.classList.add('tappable')
             } else {
-                // Desktop: use hover to show popups
-                wordElement.addEventListener('mouseenter', handleMouseEnter)
-                wordElement.addEventListener('mouseleave', handleMouseLeave)
+                elem.addEventListener('mouseenter', on_activeEnter)
+                elem.addEventListener('mouseleave', on_activeLeave)
             }
         }
     }());
 
-        // ========================================
-        // COPYRIGHT NOTICE
-        // ========================================
-
-        // Add copyright notice to all cards
-        const allCards = document.querySelectorAll('.migaku-card')
-        allCards.forEach(function(card) {
-            const copyrightNotice = document.createElement('div')
-            copyrightNotice.className = 'migaku-copyright'
-            copyrightNotice.textContent = '© Meltastic'
-            card.appendChild(copyrightNotice)
-        })
-
-    }()) // End of main function
+    // Add copyright
+    (function() {
+        const cards = document.querySelectorAll('.migaku-card');
+        cards.forEach(function(card) {
+            const copyright = document.createElement('div');
+            copyright.className = 'migaku-copyright';
+            copyright.textContent = '© Meltastic';
+            card.appendChild(copyright);
+        });
+    })();
 </script>
 <!--###MIGAKU GERMAN SUPPORT JS ENDS###-->
