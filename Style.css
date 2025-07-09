@@ -223,6 +223,10 @@ main.container .card audio {
     margin-right: 4px;
 }
 
+t {
+    font-weight: bold;
+}
+
 /* Media queries */
 @media (min-width: 762px) {
     .migaku-header {
@@ -447,6 +451,8 @@ span.gender-hover-m,
 .word-text.gender-hover-m {
     color: #00a2ff !important;
     text-shadow: 0 0 1px #00a2ff;
+    border-radius: 3px;
+    padding: 1px 2px;
     font-weight: bold;
 }
 
@@ -474,6 +480,8 @@ span.gender-hover-f,
 .word-text.gender-hover-f {
     color: #ff69b4 !important;
     text-shadow: 0 0 1px #ff69b4;
+    border-radius: 3px;
+    padding: 1px 2px;
     font-weight: bold;
 }
 
@@ -501,6 +509,8 @@ span.gender-hover-n,
 .word-text.gender-hover-n {
     color: #808080 !important;
     text-shadow: 0 0 1px #808080;
+    border-radius: 3px;
+    padding: 1px 2px;
     font-weight: bold;
 }
 
@@ -529,6 +539,8 @@ span.gender-hover-v,
 .word-text.gender-hover-v {
     color: #9b59b6 !important;
     text-shadow: 0 0 1px #9b59b6;
+    border-radius: 3px;
+    padding: 1px 2px;
     font-weight: bold;
 }
 
@@ -607,6 +619,8 @@ span.gender-hover-missing,
 .word-text.gender-hover-missing {
     color: #28a745 !important;
     text-shadow: 0 0 1px #28a745;
+    border-radius: 3px;
+    padding: 1px 2px;
 }
 
 /* Dark mode green color for missing gender */
@@ -619,16 +633,8 @@ span.gender-hover-missing,
 
 /* Target word highlighting */
 .target-word-highlight {
-    background-color: #343a40 !important;
-    color: #ffffff !important;
-    padding: 2px 4px;
     border-radius: 3px;
-    font-weight: bold;
+    padding: 1px 2px;
 }
 
-/* Dark mode target word highlighting */
 .ankidroid_dark_mode .target-word-highlight,
-.nightMode .target-word-highlight {
-    background-color: #ffffff !important;
-    color: #343a40 !important;
-}
