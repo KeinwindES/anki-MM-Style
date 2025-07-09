@@ -84,8 +84,12 @@
 <!--###MIGAKU GERMAN SUPPORT JS STARTS###--><script>
 
     (function () {
+        // ========================================
+        // CONSTANTS AND CONFIGURATION
+        // ========================================
 
-        const word_pos_names = {
+        // Maps part-of-speech abbreviations to full names
+        const PART_OF_SPEECH_NAMES = {
             v: "Verb",
             adj: "Adjective",
             adv: "Adverb",
@@ -114,270 +118,399 @@
             zu: "Zu for Infinitive"
         }
 
+        // Regular expression to match syntax pattern: word[dict_form,pos,gender]
+        const SYNTAX_REGEX = /(([a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F]+?)\[(.*?)\])/gm
 
+
+        // ========================================
+        // PARSING FUNCTIONS
+        // ========================================
+
+        /**
+         * Parses text containing syntax markers and returns structured data
+         * Example: "Das[das,art,n] ist[sein,v,] gut[gut,adj,]"
+         * @param {string} text - Text containing syntax markers
+         * @returns {Array} Array of parsed elements with type and properties
+         */
         function parseSyntax(text) {
-            let ret = []
-
-            const syntax_re = new RegExp(/(([a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F]+?)\[(.*?)\])/gm)
-            let last_idx = 0
+            const parsedElements = []
+            let lastIndex = 0
             let match
 
             do {
-                match = syntax_re.exec(text)
+                match = SYNTAX_REGEX.exec(text)
 
                 if (match) {
-                    if (match.index > last_idx) {
-                        ret.push({
+                    // Add any plain text before the syntax match
+                    if (match.index > lastIndex) {
+                        parsedElements.push({
                             type: 'plain',
-                            text: text.substring(last_idx, match.index)
+                            text: text.substring(lastIndex, match.index)
                         })
                     }
 
-                    const args = match[3].split(',')
-                    const dict_form = args[0] || ''
-                    const word_pos = args[1] || ''
-                    const gender = args[2] || 'x'
+                    // Parse syntax content - handle multiple entries separated by |
+                    const syntaxContent = match[3]
+                    const firstEntry = syntaxContent.split('|')[0] // Take first entry if multiple
+                    const entryParts = firstEntry.split(',')
 
-                    ret.push({
+                    const dictionaryForm = entryParts[0] || ''
+                    const partOfSpeech = entryParts[1] || ''
+                    const gender = entryParts[2] || 'x'
+
+                    parsedElements.push({
                         type: 'syntax',
-                        text: match[2],
-                        dict_form: dict_form,
-                        word_pos: word_pos,
-                        gender: gender
+                        text: match[2],                // The actual word
+                        dict_form: dictionaryForm,     // Dictionary/base form
+                        word_pos: partOfSpeech,        // Part of speech
+                        gender: gender                 // Gender (m/f/n/x)
                     })
 
-                    last_idx = match.index + match[0].length
+                    lastIndex = match.index + match[0].length
                 }
             } while (match)
 
-            if (last_idx < text.length) {
-                ret.push({
+            // Add any remaining plain text
+            if (lastIndex < text.length) {
+                parsedElements.push({
                     type: 'plain',
-                    text: text.substr(last_idx)
+                    text: text.substr(lastIndex)
                 })
             }
 
-            return ret
+            return parsedElements
         }
 
-        function syntaxElementToNode(syntax_element, field_settings) {
-            if (syntax_element.type !== 'syntax') {
-                return document.createTextNode(syntax_element.text)
+        /**
+         * Creates a DOM node from a parsed syntax element
+         * @param {Object} syntaxElement - Parsed syntax element
+         * @param {Object} fieldSettings - Field configuration settings
+         * @returns {Node} DOM node representing the element
+         */
+        function createNodeFromSyntaxElement(syntaxElement, fieldSettings) {
+            // Handle plain text elements
+            if (syntaxElement.type !== 'syntax') {
+                return document.createTextNode(syntaxElement.text)
             }
-            else {
-                const word_container = document.createElement('span')
-                word_container.classList.add('word')
 
-                const audio_play_word = syntax_element.text
-                word_container.addEventListener('click', function () {
-                    pycmd('play_audio-' + audio_play_word)
-                })
+            // Create word container with click handler for audio
+            const wordContainer = document.createElement('span')
+            wordContainer.classList.add('word')
+            wordContainer.addEventListener('click', function () {
+                pycmd('play_audio-' + syntaxElement.text)
+            })
 
-                const text_elem = document.createElement('span')
-                text_elem.textContent = syntax_element.text
-                text_elem.classList.add('word-text')
+            // Create text element for the word
+            const textElement = document.createElement('span')
+            textElement.textContent = syntaxElement.text
+            textElement.classList.add('word-text')
 
-                if (field_settings.gender_coloring !== 'no') {
-                    let gender_class = 'gender-'
-                    if (field_settings.gender_coloring === 'hover') {
-                        gender_class += 'hover-'
-                    }
+            // Apply gender coloring if enabled
+            applyGenderColoring(textElement, syntaxElement, fieldSettings)
 
-                    // Use green for missing/empty gender, otherwise use the actual gender
-                    if (syntax_element.gender === 'x' || syntax_element.gender === '' || !syntax_element.gender) {
-                        gender_class += 'missing'
-                    } else {
-                        gender_class += syntax_element.gender
-                    }
-                    text_elem.classList.add(gender_class)
-                }
+            // Apply target word highlighting if this word matches the target
+            applyTargetWordHighlighting(textElement, syntaxElement)
 
-                // Apply highlighting only to words specifically marked as target
-                if (syntax_element.dict_form && syntax_element.dict_form.includes('TARGET')) {
-                    text_elem.classList.add('target-word-highlight');
-                }
-                word_container.appendChild(text_elem)
+            wordContainer.appendChild(textElement)
 
-                if (field_settings.popup === 'yes') {
-                    const popup_hover_box = document.createElement('div')
-                    popup_hover_box.classList.add('popup-hover-box')
-                    word_container.appendChild(popup_hover_box)
+            // Create popup if enabled
+            if (fieldSettings.popup === 'yes') {
+                createPopup(wordContainer, syntaxElement)
+            }
 
-                    const popup_container = document.createElement('div')
-                    popup_container.classList.add('popup')
-                    word_container.appendChild(popup_container)
+            return wordContainer
+        }
 
-                    const pos_gender = document.createElement('div')
-                    pos_gender.classList.add('word-pos-gender')
-                    popup_container.appendChild(pos_gender)
+        /**
+         * Applies gender-based coloring to a text element
+         * @param {HTMLElement} textElement - The text element to style
+         * @param {Object} syntaxElement - Parsed syntax element
+         * @param {Object} fieldSettings - Field configuration settings
+         */
+        function applyGenderColoring(textElement, syntaxElement, fieldSettings) {
+            if (fieldSettings.gender_coloring === 'no') {
+                return
+            }
 
-                    const pos = document.createElement('div')
-                    pos.classList.add('word-pos')
-                    pos.textContent = word_pos_names[syntax_element.word_pos] || ''
-                    pos_gender.appendChild(pos)
+            let genderClass = 'gender-'
 
-                    const gender_symbol = document.createElement('div')
-                    gender_symbol.classList.add('word-gender-symbol-' + syntax_element.gender);;
-                    pos_gender.appendChild(gender_symbol)
+            // Add hover prefix if hover mode is enabled
+            if (fieldSettings.gender_coloring === 'hover') {
+                genderClass += 'hover-'
+            }
 
-                    const dict_form = document.createElement('div')
-                    dict_form.classList.add('dict-form')
-                    dict_form.textContent = syntax_element.dict_form
-                    popup_container.appendChild(dict_form)
-                }
+            // Determine gender class suffix
+            const hasGender = syntaxElement.gender &&
+                             syntaxElement.gender !== 'x' &&
+                             syntaxElement.gender !== ''
 
-                return word_container
+            if (hasGender) {
+                genderClass += syntaxElement.gender
+            } else {
+                genderClass += 'missing'
+            }
+
+            textElement.classList.add(genderClass)
+        }
+
+        /**
+         * Applies target word highlighting if the word matches the target
+         * @param {HTMLElement} textElement - The text element to potentially highlight
+         * @param {Object} syntaxElement - Parsed syntax element
+         */
+        function applyTargetWordHighlighting(textElement, syntaxElement) {
+            const targetWordField = document.querySelector('.migaku-card [data-field-type="target-word"]')
+            if (!targetWordField) {
+                return
+            }
+
+            const targetWord = targetWordField.textContent.trim().toLowerCase()
+            const currentWord = syntaxElement.text.toLowerCase()
+            const dictionaryForm = syntaxElement.dict_form ? syntaxElement.dict_form.toLowerCase() : ''
+
+            // Highlight if current word or dictionary form matches target
+            if (currentWord === targetWord || dictionaryForm === targetWord) {
+                textElement.classList.add('target-word-highlight')
             }
         }
 
-        function syntaxToNodes(syntax, field_settings) {
-            return syntax.map(function (syntax_element) {
-                return syntaxElementToNode(syntax_element, field_settings)
+        /**
+         * Creates a popup with word information
+         * @param {HTMLElement} wordContainer - Container to add popup to
+         * @param {Object} syntaxElement - Parsed syntax element
+         */
+        function createPopup(wordContainer, syntaxElement) {
+            // Create hover box for popup positioning
+            const hoverBox = document.createElement('div')
+            hoverBox.classList.add('popup-hover-box')
+            wordContainer.appendChild(hoverBox)
+
+            // Create popup container
+            const popupContainer = document.createElement('div')
+            popupContainer.classList.add('popup')
+            wordContainer.appendChild(popupContainer)
+
+            // Create part of speech and gender section
+            const posGenderSection = document.createElement('div')
+            posGenderSection.classList.add('word-pos-gender')
+            popupContainer.appendChild(posGenderSection)
+
+            // Add part of speech
+            const posElement = document.createElement('div')
+            posElement.classList.add('word-pos')
+            posElement.textContent = PART_OF_SPEECH_NAMES[syntaxElement.word_pos] || ''
+            posGenderSection.appendChild(posElement)
+
+            // Add gender symbol
+            const genderSymbol = document.createElement('div')
+            genderSymbol.classList.add('word-gender-symbol-' + syntaxElement.gender)
+            posGenderSection.appendChild(genderSymbol)
+
+            // Add dictionary form
+            const dictFormElement = document.createElement('div')
+            dictFormElement.classList.add('dict-form')
+            dictFormElement.textContent = syntaxElement.dict_form
+            popupContainer.appendChild(dictFormElement)
+        }
+
+        /**
+         * Converts array of parsed syntax elements to DOM nodes
+         * @param {Array} parsedSyntax - Array of parsed syntax elements
+         * @param {Object} fieldSettings - Field configuration settings
+         * @returns {Array} Array of DOM nodes
+         */
+        function convertSyntaxToNodes(parsedSyntax, fieldSettings) {
+            return parsedSyntax.map(function (syntaxElement) {
+                return createNodeFromSyntaxElement(syntaxElement, fieldSettings)
             })
         }
 
 
-        function handleFieldTextNodes(node, field_settings) {
-            if (node.nodeType == Node.TEXT_NODE) {
-                const text = node.textContent
-                const syntax = parseSyntax(text)
-                const nodes = syntaxToNodes(syntax, field_settings)
-                for (const child of nodes) {
-                    node.parentNode.insertBefore(child, node)
+        /**
+         * Recursively processes text nodes in a field to apply syntax parsing
+         * @param {Node} node - DOM node to process
+         * @param {Object} fieldSettings - Field configuration settings
+         */
+        function processFieldTextNodes(node, fieldSettings) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                // Parse the text content and convert to enhanced nodes
+                const textContent = node.textContent
+                const parsedSyntax = parseSyntax(textContent)
+                const enhancedNodes = convertSyntaxToNodes(parsedSyntax, fieldSettings)
+
+                // Replace the original text node with enhanced nodes
+                for (const enhancedNode of enhancedNodes) {
+                    node.parentNode.insertBefore(enhancedNode, node)
                 }
                 node.parentNode.removeChild(node)
-            }
-            else {
+            } else {
+                // Process child nodes recursively (in reverse order to handle DOM changes)
                 for (let i = node.childNodes.length - 1; i >= 0; i--) {
-                    handleFieldTextNodes(node.childNodes[i], field_settings)
+                    processFieldTextNodes(node.childNodes[i], fieldSettings)
                 }
             }
         }
 
-        function handleField(field) {
-            const field_settings = {
-                popup: field.getAttribute('data-popup') || 'no',
-                gender_coloring: field.getAttribute('data-gender-coloring') || 'no',
-                field_element: field
+        /**
+         * Processes a field element to apply syntax enhancements
+         * @param {HTMLElement} fieldElement - The field element to process
+         */
+        function processField(fieldElement) {
+            const fieldSettings = {
+                popup: fieldElement.getAttribute('data-popup') || 'no',
+                gender_coloring: fieldElement.getAttribute('data-gender-coloring') || 'no',
+                field_element: fieldElement
             }
 
-            handleFieldTextNodes(field, field_settings)
+            processFieldTextNodes(fieldElement, fieldSettings)
         }
 
 
-        const fields = document.querySelectorAll('.field')
+        // ========================================
+        // FIELD PROCESSING
+        // ========================================
 
-        for (field of fields) {
-            handleField(field)
+        // Process all fields with syntax enhancements
+        const allFields = document.querySelectorAll('.field')
+        for (const field of allFields) {
+            processField(field)
         }
 
 
-        function closeAllActive() {
-            const current_popups = document.querySelectorAll('.active')
-            for (const popup of current_popups) {
+        // ========================================
+        // POPUP INTERACTION HANDLERS
+        // ========================================
+
+        /**
+         * Closes all currently active popups
+         */
+        function closeAllActivePopups() {
+            const activePopups = document.querySelectorAll('.active')
+            for (const popup of activePopups) {
                 popup.classList.remove('active', 'popup-active')
             }
         }
 
-        function activeEnablePopup(elem) {
-            const popup_elem = elem.querySelector('.popup')
-            if (!popup_elem) {
+        /**
+         * Enables and positions a popup to avoid screen boundaries
+         * @param {HTMLElement} wordElement - The word element containing the popup
+         */
+        function enableAndPositionPopup(wordElement) {
+            const popupElement = wordElement.querySelector('.popup')
+            if (!popupElement) {
                 return
             }
 
-            elem.classList.add('popup-active')
+            wordElement.classList.add('popup-active')
 
-            function isTooHigh() {
-                return popup_elem.getBoundingClientRect().top < 0
-            }
+            // Helper functions to check if popup would overflow screen boundaries
+            const popupBounds = popupElement.getBoundingClientRect()
+            const screenWidth = window.innerWidth || document.documentElement.clientWidth
+            const screenHeight = window.innerHeight || document.documentElement.clientHeight
 
-            function isTooLow() {
-                return popup_elem.getBoundingClientRect().bottom >= (window.innerHeight || document.documentElement.clientHeight)
-            }
+            const wouldOverflowTop = () => popupBounds.top < 0
+            const wouldOverflowBottom = () => popupBounds.bottom >= screenHeight
+            const wouldOverflowLeft = () => popupBounds.left < 0
+            const wouldOverflowRight = () => popupBounds.right >= screenWidth
 
-            function isTooRight() {
-                return popup_elem.getBoundingClientRect().right >= (window.innerWidth || document.documentElement.clientWidth)
-            }
+            // Remove all direction classes before testing
+            const directionClasses = ['popup-direction-u', 'popup-direction-d', 'popup-direction-l', 'popup-direction-r']
+            wordElement.classList.remove(...directionClasses)
 
-            function isTooLeft() {
-                return popup_elem.getBoundingClientRect().left < 0
-            }
+            // Try positioning popup above (up) first
+            wordElement.classList.add('popup-direction-u')
+            if (!wouldOverflowTop()) return
 
-            elem.classList.remove('popup-direction-u', 'popup-direction-d', 'popup-direction-l', 'popup-direction-r')
+            // Try positioning popup below (down)
+            wordElement.classList.remove('popup-direction-u')
+            wordElement.classList.add('popup-direction-d')
+            if (!wouldOverflowBottom()) return
 
-            elem.classList.add('popup-direction-u')
-            if (!isTooHigh()) {
-                return
-            }
-            elem.classList.remove('popup-direction-u')
+            // Try positioning popup to the left
+            wordElement.classList.remove('popup-direction-d')
+            wordElement.classList.add('popup-direction-l')
+            if (!wouldOverflowLeft()) return
 
-            elem.classList.add('popup-direction-d')
-            if (!isTooLow()) {
-                return
-            }
-            elem.classList.remove('popup-direction-d')
+            // Try positioning popup to the right
+            wordElement.classList.remove('popup-direction-l')
+            wordElement.classList.add('popup-direction-r')
+            if (!wouldOverflowRight()) return
 
-            elem.classList.add('popup-direction-l')
-            if (!isTooLeft()) {
-                return
-            }
-            elem.classList.remove('popup-direction-l')
-
-            elem.classList.add('popup-direction-r')
-            if (!isTooRight()) {
-                return
-            }
-            elem.classList.remove('popup-direction-r')
-
-            elem.classList.add('popup-direction-u')
+            // Default to up if all positions would overflow
+            wordElement.classList.remove('popup-direction-r')
+            wordElement.classList.add('popup-direction-u')
         }
 
-        function on_activeEnter() {
-            const was_active = this.classList.contains('active')
-            closeAllActive()
-            if (was_active) {
-                return
+        /**
+         * Handles mouse enter events for desktop popup interaction
+         */
+        function handleMouseEnter() {
+            const wasAlreadyActive = this.classList.contains('active')
+            closeAllActivePopups()
+
+            if (wasAlreadyActive) {
+                return // Don't reopen if it was already active
             }
+
             this.classList.add('active')
-            activeEnablePopup(this)
+            enableAndPositionPopup(this)
         }
 
-        function on_activeLeave() {
+        /**
+         * Handles mouse leave events for desktop popup interaction
+         */
+        function handleMouseLeave() {
             this.classList.remove('active', 'popup-active')
         }
 
-        function on_activeToggle() {
-            if (this.classList.contains('active')) {
+        /**
+         * Handles tap/click events for mobile popup interaction
+         */
+        function handleTapToggle() {
+            const isCurrentlyActive = this.classList.contains('active')
+
+            if (isCurrentlyActive) {
                 this.classList.remove('active', 'popup-active')
             } else {
-                closeAllActive()
+                closeAllActivePopups()
                 this.classList.add('active')
-                activeEnablePopup(this)
+                enableAndPositionPopup(this)
             }
         }
 
-        const word_elements = document.querySelectorAll('.word')
-        const is_mobile = typeof (pycmd) === typeof (undefined)
-        for (elem of word_elements) {
-            if (is_mobile) {
-                elem.addEventListener('click', on_activeToggle)
-                elem.classList.add('tappable')
+        // ========================================
+        // EVENT LISTENER SETUP
+        // ========================================
+
+        // Set up interaction handlers for all word elements
+        const wordElements = document.querySelectorAll('.word')
+        const isMobileDevice = typeof (pycmd) === typeof (undefined)
+
+        for (const wordElement of wordElements) {
+            if (isMobileDevice) {
+                // Mobile: use tap to toggle popups
+                wordElement.addEventListener('click', handleTapToggle)
+                wordElement.classList.add('tappable')
             } else {
-                elem.addEventListener('mouseenter', on_activeEnter)
-                elem.addEventListener('mouseleave', on_activeLeave)
+                // Desktop: use hover to show popups
+                wordElement.addEventListener('mouseenter', handleMouseEnter)
+                wordElement.addEventListener('mouseleave', handleMouseLeave)
             }
         }
-    }());
 
-    // Add copyright
-    (function() {
-        const cards = document.querySelectorAll('.migaku-card');
-        cards.forEach(function(card) {
-            const copyright = document.createElement('div');
-            copyright.className = 'migaku-copyright';
-            copyright.textContent = '© Meltastic';
-            card.appendChild(copyright);
-        });
-    })();
+        // ========================================
+        // COPYRIGHT NOTICE
+        // ========================================
+
+        // Add copyright notice to all cards
+        const allCards = document.querySelectorAll('.migaku-card')
+        allCards.forEach(function(card) {
+            const copyrightNotice = document.createElement('div')
+            copyrightNotice.className = 'migaku-copyright'
+            copyrightNotice.textContent = '© Meltastic'
+            card.appendChild(copyrightNotice)
+        })
+
+    }()) // End of main function
 </script>
 <!--###MIGAKU GERMAN SUPPORT JS ENDS###-->

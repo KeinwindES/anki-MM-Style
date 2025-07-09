@@ -223,10 +223,6 @@ main.container .card audio {
     margin-right: 4px;
 }
 
-t {
-    font-weight: bold;
-}
-
 /* Media queries */
 @media (min-width: 762px) {
     .migaku-header {
@@ -451,9 +447,6 @@ span.gender-hover-m,
 .word-text.gender-hover-m {
     color: #00a2ff !important;
     text-shadow: 0 0 1px #00a2ff;
-    background-color: rgba(0, 162, 255, 0.15) !important;
-    border-radius: 3px;
-    padding: 1px 2px;
     font-weight: bold;
 }
 
@@ -481,9 +474,6 @@ span.gender-hover-f,
 .word-text.gender-hover-f {
     color: #ff69b4 !important;
     text-shadow: 0 0 1px #ff69b4;
-    background-color: rgba(255, 105, 180, 0.15) !important;
-    border-radius: 3px;
-    padding: 1px 2px;
     font-weight: bold;
 }
 
@@ -511,9 +501,6 @@ span.gender-hover-n,
 .word-text.gender-hover-n {
     color: #808080 !important;
     text-shadow: 0 0 1px #808080;
-    background-color: rgba(128, 128, 128, 0.15) !important;
-    border-radius: 3px;
-    padding: 1px 2px;
     font-weight: bold;
 }
 
@@ -542,9 +529,6 @@ span.gender-hover-v,
 .word-text.gender-hover-v {
     color: #9b59b6 !important;
     text-shadow: 0 0 1px #9b59b6;
-    background-color: rgba(155, 89, 182, 0.15) !important;
-    border-radius: 3px;
-    padding: 1px 2px;
     font-weight: bold;
 }
 
@@ -569,7 +553,6 @@ span.gender-hover-v,
 .nightMode .gender-m,
 .nightMode .gender-hover-m {
     color: #4dc3ff !important;
-    background-color: rgba(77, 195, 255, 0.2) !important;
 }
 
 .ankidroid_dark_mode .gender-f,
@@ -577,7 +560,6 @@ span.gender-hover-v,
 .nightMode .gender-f,
 .nightMode .gender-hover-f {
     color: #ff8fc7 !important;
-    background-color: rgba(255, 143, 199, 0.2) !important;
 }
 
 .ankidroid_dark_mode .gender-n,
@@ -585,7 +567,6 @@ span.gender-hover-v,
 .nightMode .gender-n,
 .nightMode .gender-hover-n {
     color: #a0a0a0 !important;
-    background-color: rgba(160, 160, 160, 0.2) !important;
 }
 
 .ankidroid_dark_mode .gender-v,
@@ -593,7 +574,6 @@ span.gender-hover-v,
 .nightMode .gender-v,
 .nightMode .gender-hover-v {
     color: #bb7ae6 !important;
-    background-color: rgba(187, 122, 230, 0.2) !important;
 }
 
 /* Dark mode copyright */
@@ -627,10 +607,6 @@ span.gender-hover-missing,
 .word-text.gender-hover-missing {
     color: #28a745 !important;
     text-shadow: 0 0 1px #28a745;
-    background-color: rgba(40, 167, 69, 0.15) !important;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-weight: bold;
 }
 
 /* Dark mode green color for missing gender */
@@ -639,18 +615,20 @@ span.gender-hover-missing,
 .nightMode .gender-missing,
 .nightMode .gender-hover-missing {
     color: #5cb85c !important;
-    background-color: rgba(92, 184, 92, 0.2) !important;
 }
 
 /* Target word highlighting */
 .target-word-highlight {
-    background-color: rgba(255, 255, 0, 0.3) !important;
+    background-color: #343a40 !important;
+    color: #ffffff !important;
+    padding: 2px 4px;
     border-radius: 3px;
-    padding: 1px 2px;
     font-weight: bold;
 }
 
+/* Dark mode target word highlighting */
 .ankidroid_dark_mode .target-word-highlight,
 .nightMode .target-word-highlight {
-    background-color: rgba(255, 255, 0, 0.4) !important;
+    background-color: #ffffff !important;
+    color: #343a40 !important;
 }
