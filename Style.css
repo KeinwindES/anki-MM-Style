@@ -453,7 +453,6 @@ span.gender-hover-m,
     text-shadow: 0 0 1px #00a2ff;
     border-radius: 3px;
     padding: 1px 2px;
-    font-weight: bold;
 }
 
 .gender-f,
@@ -482,7 +481,6 @@ span.gender-hover-f,
     text-shadow: 0 0 1px #ff69b4;
     border-radius: 3px;
     padding: 1px 2px;
-    font-weight: bold;
 }
 
 .gender-n,
@@ -511,7 +509,6 @@ span.gender-hover-n,
     text-shadow: 0 0 1px #808080;
     border-radius: 3px;
     padding: 1px 2px;
-    font-weight: bold;
 }
 
 /* Add verb highlighting for completeness */
@@ -541,7 +538,6 @@ span.gender-hover-v,
     text-shadow: 0 0 1px #9b59b6;
     border-radius: 3px;
     padding: 1px 2px;
-    font-weight: bold;
 }
 
 /* Copyright and branding */
