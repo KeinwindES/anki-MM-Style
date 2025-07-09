@@ -629,8 +629,13 @@ span.gender-hover-missing,
 
 /* Target word highlighting */
 .target-word-highlight {
+    font-style: italic !important;
+    background-color: rgba(255, 255, 0, 0.2) !important;
     border-radius: 3px;
     padding: 1px 2px;
 }
 
 .ankidroid_dark_mode .target-word-highlight,
+.nightMode .target-word-highlight {
+    background-color: rgba(255, 255, 0, 0.15) !important;
+}

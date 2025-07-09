@@ -274,9 +274,6 @@
             return text.replace(/\[(.*?)\]/g, '').trim()
         }
 
-        // Mark target words after all fields are processed
-        markTargetWordsInSentence()
-
         function markTargetWordsInSentence() {
             const targetWordText = getTargetWordText()
             if (!targetWordText) return
@@ -303,8 +300,8 @@
             handleField(field)
         }
 
-
-
+        // Mark target words after all fields are processed
+        markTargetWordsInSentence()
 
         function closeAllActive() {
             const current_popups = document.querySelectorAll('.active')
