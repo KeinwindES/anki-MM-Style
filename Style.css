@@ -1,0 +1,656 @@
+/* Managed Migaku Note Type */
+
+@font-face {
+    font-family: cardFont;
+    src: url("/_NotoSerif.ttf");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main.container {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
+
+main.container #qa {
+    margin-top: 0;
+}
+
+main.container .card {
+    min-height: calc(100vh - 240px);
+}
+
+main.container .card audio {
+    width: 150px;
+}
+
+#content {
+    margin: 0;
+}
+
+.card,
+.card * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: cardFont, sans-serif;
+}
+
+.card {
+    background: white;
+    font-size: 18px;
+    font-smooth: always;
+    color: rgb(40, 40, 50);
+    height: 100%;
+    width: 100%;
+}
+
+.migaku-card,
+.migaku-typeselect {
+    position: relative;
+    background: white;
+    border: 1px solid black;
+    width: 90%;
+    max-width: 650px;
+    margin: 20px auto 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: left;
+}
+
+.migaku-card-front .migaku-card-content {
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.migaku-card-back .migaku-card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: relative;
+}
+
+.migaku-indented {
+    margin-left: 5%;
+}
+
+.sentence-separator {
+    width: 100%;
+    margin: 15px 0;
+    border-color: rgb(220, 220, 220);
+}
+
+.migaku-card-sentence {
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.migaku-card-unknown {
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+.migaku-card-translation,
+.migaku-card-examples {
+    color: rgba(30, 30, 55, 0.7);
+}
+
+.migaku-card-translation,
+.migaku-card-sentence-audio {
+    text-align: center;
+    width: 100%;
+}
+
+.migaku-card-sentence-audio,
+.migaku-card-unknown-audio {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.migaku-card-sentence-audio {
+    justify-content: center;
+}
+
+.migaku-card-screenshot,
+.migaku-card-images {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    align-items: end;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    justify-items: center;
+}
+
+.migaku-card-screenshot br,
+.migaku-card-images br {
+    display: none;
+}
+
+.migaku-card-images {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    grid-gap: 5px;
+    grid-template-columns: auto auto auto auto;
+}
+
+.migaku-card-screenshot img {
+    max-width: 100%;
+    max-height: 365px;
+}
+
+.migaku-card-images img {
+    max-width: 100%;
+    max-height: 125px;
+}
+
+.migaku-card-examples {
+    margin-bottom: 15px;
+}
+
+.migaku-card-sentence,
+.migaku-card-unknown,
+.migaku-card-translation,
+.migaku-card-examples,
+.migaku-card-definitions {
+    word-break: break-word;
+}
+
+.migaku-typeselect {
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.migaku-typeselect label {
+    padding: 0 7px;
+    white-space: nowrap;
+    font-family: sans-serif;
+}
+
+/* Dark mode styles */
+.ankidroid_dark_mode .migaku-header,
+.nightMode .migaku-header {
+    background: #f9a746;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ankidroid_dark_mode.card,
+.nightMode.card {
+    color: rgb(245, 245, 255);
+    background: #2b303b;
+}
+
+.ankidroid_dark_mode .migaku-card-translation,
+.nightMode .migaku-card-translation,
+.ankidroid_dark_mode .migaku-card-examples,
+.nightMode .migaku-card-examples {
+    color: rgba(230, 230, 255, 0.65);
+}
+
+.ankidroid_dark_mode .migaku-card,
+.nightMode .migaku-card,
+.ankidroid_dark_mode .migaku-typeselect,
+.nightMode .migaku-typeselect {
+    background: #363c4a;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.ankidroid_dark_mode .sentence-separator,
+.nightMode .sentence-separator {
+    border-color: rgb(175, 175, 175);
+}
+
+.replay-button {
+    height: 25px;
+}
+
+.playImage {
+    height: 30px !important;
+    width: 30px !important;
+    margin-right: 4px;
+}
+
+t {
+    font-weight: bold;
+}
+
+/* Media queries */
+@media (min-width: 762px) {
+    .migaku-header {
+        justify-content: start;
+        padding-left: 20px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .migaku-card,
+    .migaku-typeselect {
+        width: 96%;
+    }
+}
+
+/* German support - Popup functionality */
+.word {
+    position: relative;
+}
+
+.popup {
+    visibility: hidden;
+    position: absolute;
+    z-index: 100;
+    padding: 7px;
+    border-radius: 5px;
+    text-align: left;
+    background-color: #e5f9ff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+.nightMode .popup,
+.ankidroid_dark_mode .popup {
+    color: #ffffff;
+    background-color: #2b303b;
+}
+
+.popup-active .popup {
+    visibility: visible;
+}
+
+.popup-direction-u .popup {
+    left: 0;
+    bottom: calc(100% + 10px);
+}
+
+.popup-direction-d .popup {
+    left: 0;
+    top: calc(100% + 10px);
+}
+
+.popup-direction-l .popup {
+    right: calc(100% + 10px);
+    top: 0;
+}
+
+.popup-direction-r .popup {
+    left: calc(100% + 10px);
+    top: 0;
+}
+
+.popup-direction-u .popup:after {
+    content: " ";
+    position: absolute;
+    left: 5px;
+    bottom: -10px;
+    border-top: 10px solid #e5f9ff;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: none;
+}
+
+.nightMode .popup-direction-u .popup:after,
+.ankidroid_dark_mode .popup-direction-u .popup:after {
+    border-top: 10px solid #2b303b;
+}
+
+.popup-direction-d .popup:after {
+    content: " ";
+    position: absolute;
+    left: 5px;
+    top: -10px;
+    border-top: none;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: 10px solid #e5f9ff;
+}
+
+.nightMode .popup-direction-d .popup:after,
+.ankidroid_dark_mode .popup-direction-d .popup:after {
+    border-bottom: 10px solid #2b303b;
+}
+
+.popup-direction-l .popup:after {
+    content: " ";
+    position: absolute;
+    right: -10px;
+    top: 5px;
+    border-top: 10px solid transparent;
+    border-right: none;
+    border-left: 10px solid #e5f9ff;
+    border-bottom: 10px solid transparent;
+}
+
+.nightMode .popup-direction-l .popup:after,
+.ankidroid_dark_mode .popup-direction-l .popup:after {
+    border-left: 10px solid #2b303b;
+}
+
+.popup-direction-r .popup:after {
+    content: " ";
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #e5f9ff;
+    border-left: none;
+    border-bottom: 10px solid transparent;
+}
+
+.nightMode .popup-direction-r .popup:after,
+.ankidroid_dark_mode .popup-direction-r .popup:after {
+    border-right: 10px solid #2b303b;
+}
+
+.popup-hover-box {
+    visibility: hidden;
+    position: absolute;
+    z-index: 50;
+}
+
+.popup-active .popup-hover-box {
+    visibility: visible;
+}
+
+.popup-direction-u .popup-hover-box {
+    left: 0;
+    bottom: 100%;
+    width: 100%;
+    height: calc(10px + 5px);
+}
+
+.popup-direction-d .popup-hover-box {
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: calc(10px + 5px);
+}
+
+.popup-direction-l .popup-hover-box {
+    top: 0;
+    right: 100%;
+    width: calc(10px + 5px);
+    height: 100%;
+}
+
+.popup-direction-r .popup-hover-box {
+    top: 0;
+    left: 100%;
+    width: calc(10px + 5px);
+    height: 100%;
+}
+
+.word-pos-gender {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.word-pos {
+    color: #808080;
+    padding-right: 15px;
+}
+
+.word-gender-symbol-m::before {
+    content: "\2642";
+    color: #00a2ff;
+}
+
+.word-gender-symbol-f::before {
+    content: "\2640";
+    color: #ff69b4;
+}
+
+.word-gender-symbol-n::before {
+    content: "\26AA";
+    color: #808080;
+}
+
+.word-gender-symbol-x::before {
+    content: "\00D7";
+    color: #ac80ff;
+}
+
+.dict-form {
+    margin-top: 5px;
+    font-size: 25px;
+}
+
+/* Gender color coding - comprehensive selectors */
+.gender-m,
+.gender-hover-m,
+.card .gender-m,
+.card .gender-hover-m,
+.card * .gender-m,
+.card * .gender-hover-m,
+.migaku-card .gender-m,
+.migaku-card .gender-hover-m,
+.migaku-card * .gender-m,
+.migaku-card * .gender-hover-m,
+.migaku-card-content .gender-m,
+.migaku-card-content .gender-hover-m,
+.migaku-card-content * .gender-m,
+.migaku-card-content * .gender-hover-m,
+main.container .card .gender-m,
+main.container .card .gender-hover-m,
+main.container .card * .gender-m,
+main.container .card * .gender-hover-m,
+span.gender-m,
+span.gender-hover-m,
+.word-text.gender-m,
+.word-text.gender-hover-m {
+    color: #00a2ff !important;
+    text-shadow: 0 0 1px #00a2ff;
+    background-color: rgba(0, 162, 255, 0.15) !important;
+    border-radius: 3px;
+    padding: 1px 2px;
+    font-weight: bold;
+}
+
+.gender-f,
+.gender-hover-f,
+.card .gender-f,
+.card .gender-hover-f,
+.card * .gender-f,
+.card * .gender-hover-f,
+.migaku-card .gender-f,
+.migaku-card .gender-hover-f,
+.migaku-card * .gender-f,
+.migaku-card * .gender-hover-f,
+.migaku-card-content .gender-f,
+.migaku-card-content .gender-hover-f,
+.migaku-card-content * .gender-f,
+.migaku-card-content * .gender-hover-f,
+main.container .card .gender-f,
+main.container .card .gender-hover-f,
+main.container .card * .gender-f,
+main.container .card * .gender-hover-f,
+span.gender-f,
+span.gender-hover-f,
+.word-text.gender-f,
+.word-text.gender-hover-f {
+    color: #ff69b4 !important;
+    text-shadow: 0 0 1px #ff69b4;
+    background-color: rgba(255, 105, 180, 0.15) !important;
+    border-radius: 3px;
+    padding: 1px 2px;
+    font-weight: bold;
+}
+
+.gender-n,
+.gender-hover-n,
+.card .gender-n,
+.card .gender-hover-n,
+.card * .gender-n,
+.card * .gender-hover-n,
+.migaku-card .gender-n,
+.migaku-card .gender-hover-n,
+.migaku-card * .gender-n,
+.migaku-card * .gender-hover-n,
+.migaku-card-content .gender-n,
+.migaku-card-content .gender-hover-n,
+.migaku-card-content * .gender-n,
+.migaku-card-content * .gender-hover-n,
+main.container .card .gender-n,
+main.container .card .gender-hover-n,
+main.container .card * .gender-n,
+main.container .card * .gender-hover-n,
+span.gender-n,
+span.gender-hover-n,
+.word-text.gender-n,
+.word-text.gender-hover-n {
+    color: #808080 !important;
+    text-shadow: 0 0 1px #808080;
+    background-color: rgba(128, 128, 128, 0.15) !important;
+    border-radius: 3px;
+    padding: 1px 2px;
+    font-weight: bold;
+}
+
+/* Add verb highlighting for completeness */
+.gender-v,
+.gender-hover-v,
+.card .gender-v,
+.card .gender-hover-v,
+.card * .gender-v,
+.card * .gender-hover-v,
+.migaku-card .gender-v,
+.migaku-card .gender-hover-v,
+.migaku-card * .gender-v,
+.migaku-card * .gender-hover-v,
+.migaku-card-content .gender-v,
+.migaku-card-content .gender-hover-v,
+.migaku-card-content * .gender-v,
+.migaku-card-content * .gender-hover-v,
+main.container .card .gender-v,
+main.container .card .gender-hover-v,
+main.container .card * .gender-v,
+main.container .card * .gender-hover-v,
+span.gender-v,
+span.gender-hover-v,
+.word-text.gender-v,
+.word-text.gender-hover-v {
+    color: #9b59b6 !important;
+    text-shadow: 0 0 1px #9b59b6;
+    background-color: rgba(155, 89, 182, 0.15) !important;
+    border-radius: 3px;
+    padding: 1px 2px;
+    font-weight: bold;
+}
+
+/* Copyright and branding */
+.migaku-card {
+    position: relative;
+}
+
+.migaku-copyright {
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    color: rgba(128, 128, 128, 0.6);
+    font-size: 11px;
+    font-weight: normal;
+    pointer-events: none;
+}
+
+/* Dark mode gender colors */
+.ankidroid_dark_mode .gender-m,
+.ankidroid_dark_mode .gender-hover-m,
+.nightMode .gender-m,
+.nightMode .gender-hover-m {
+    color: #4dc3ff !important;
+    background-color: rgba(77, 195, 255, 0.2) !important;
+}
+
+.ankidroid_dark_mode .gender-f,
+.ankidroid_dark_mode .gender-hover-f,
+.nightMode .gender-f,
+.nightMode .gender-hover-f {
+    color: #ff8fc7 !important;
+    background-color: rgba(255, 143, 199, 0.2) !important;
+}
+
+.ankidroid_dark_mode .gender-n,
+.ankidroid_dark_mode .gender-hover-n,
+.nightMode .gender-n,
+.nightMode .gender-hover-n {
+    color: #a0a0a0 !important;
+    background-color: rgba(160, 160, 160, 0.2) !important;
+}
+
+.ankidroid_dark_mode .gender-v,
+.ankidroid_dark_mode .gender-hover-v,
+.nightMode .gender-v,
+.nightMode .gender-hover-v {
+    color: #bb7ae6 !important;
+    background-color: rgba(187, 122, 230, 0.2) !important;
+}
+
+/* Dark mode copyright */
+.ankidroid_dark_mode .migaku-copyright,
+.nightMode .migaku-copyright {
+    color: rgba(200, 200, 200, 0.5);
+}
+
+/* Green color for words with missing gender */
+.gender-missing,
+.gender-hover-missing,
+.card .gender-missing,
+.card .gender-hover-missing,
+.card * .gender-missing,
+.card * .gender-hover-missing,
+.migaku-card .gender-missing,
+.migaku-card .gender-hover-missing,
+.migaku-card * .gender-missing,
+.migaku-card * .gender-hover-missing,
+.migaku-card-content .gender-missing,
+.migaku-card-content .gender-hover-missing,
+.migaku-card-content * .gender-missing,
+.migaku-card-content * .gender-hover-missing,
+main.container .card .gender-missing,
+main.container .card .gender-hover-missing,
+main.container .card * .gender-missing,
+main.container .card * .gender-hover-missing,
+span.gender-missing,
+span.gender-hover-missing,
+.word-text.gender-missing,
+.word-text.gender-hover-missing {
+    color: #28a745 !important;
+    text-shadow: 0 0 1px #28a745;
+    background-color: rgba(40, 167, 69, 0.15) !important;
+    border-radius: 3px;
+    padding: 1px 2px;
+    font-weight: bold;
+}
+
+/* Dark mode green color for missing gender */
+.ankidroid_dark_mode .gender-missing,
+.ankidroid_dark_mode .gender-hover-missing,
+.nightMode .gender-missing,
+.nightMode .gender-hover-missing {
+    color: #5cb85c !important;
+    background-color: rgba(92, 184, 92, 0.2) !important;
+}
+
+/* Target word highlighting */
+.target-word-highlight {
+    background-color: rgba(255, 255, 0, 0.3) !important;
+    border-radius: 3px;
+    padding: 1px 2px;
+    font-weight: bold;
+}
+
+.ankidroid_dark_mode .target-word-highlight,
+.nightMode .target-word-highlight {
+    background-color: rgba(255, 255, 0, 0.4) !important;
+}
