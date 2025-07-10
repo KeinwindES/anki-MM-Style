@@ -128,46 +128,18 @@
                 text_elem.classList.add('word-text')
 
                 if (field_settings.gender_coloring !== 'no') {
-                    let pos_class = 'pos-'
+                    let gender_class = 'gender-'
                     if (field_settings.gender_coloring === 'hover') {
-                        pos_class += 'hover-'
+                        gender_class += 'hover-'
                     }
 
-                    // Map part of speech to color class
-                    const posMapping = {
-                        'n': 'n',           // noun
-                        'pn': 'n',          // proper noun -> noun color
-                        'v': 'v',           // verb
-                        'adj': 'adj',       // adjective
-                        'adv': 'adv',       // adverb
-                        'art': 'art',       // article
-                        'pron': 'pron',     // pronoun
-                        'per': 'pron',      // personal pronoun -> pronoun color
-                        'rel': 'pron',      // relative pronoun -> pronoun color
-                        'demo': 'pron',     // demonstrative -> pronoun color
-                        'poss': 'pron',     // possessive -> pronoun color
-                        'ind': 'pron',      // indefinite pronoun -> pronoun color
-                        'pro': 'pron',      // interrogative pronoun -> pronoun color
-                        'prep': 'prep',     // preposition
-                        'prepart': 'prep',  // preposition w/ article -> preposition color
-                        'ppos': 'prep',     // postposition -> preposition color
-                        'conj': 'conj',     // conjunction
-                        'det': 'det',       // determiner
-                        'part': 'other',    // particle
-                        'vpart': 'other',   // verb particle
-                        'int': 'other',     // interjection
-                        'cnum': 'other',    // cardinal number
-                        'onum': 'other',    // ordinal number
-                        'circ': 'other',    // zirkumposition
-                        'proadv': 'other',  // pronominal adverb
-                        'advpro': 'other',  // adverbial interrogative pronoun
-                        'trunc': 'other',   // kompositions-erstglied
-                        'zu': 'other'       // zu for infinitive
-                    };
-
-                    const posClass = posMapping[syntax_element.word_pos] || 'other';
-                    pos_class += posClass;
-                    text_elem.classList.add(pos_class);
+                    // Use green for missing/empty gender, otherwise use the actual gender
+                    if (syntax_element.gender === 'x' || syntax_element.gender === '' || !syntax_element.gender) {
+                        gender_class += 'missing'
+                    } else {
+                        gender_class += syntax_element.gender
+                    }
+                    text_elem.classList.add(gender_class)
                 }
 
                 // Target word highlighting will be handled after all fields are processed
