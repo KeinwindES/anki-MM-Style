@@ -862,7 +862,18 @@ span.gender-hover-missing,
     text-shadow: 0 0 1px #5cb85c;
 }
 
-/* Target word highlighting */
+/* Target word highlighting - Front side (just italic) */
+.migaku-card-front .target-word-highlight,
+.migaku-card-front .card .target-word-highlight,
+.migaku-card-front .card * .target-word-highlight,
+.migaku-card-front .migaku-card .target-word-highlight,
+.migaku-card-front .migaku-card * .target-word-highlight,
+.migaku-card-front .migaku-card-content .target-word-highlight,
+.migaku-card-front .migaku-card-content * .target-word-highlight,
+.migaku-card-front main.container .card .target-word-highlight,
+.migaku-card-front main.container .card * .target-word-highlight,
+.migaku-card-front span.target-word-highlight,
+.migaku-card-front .word-text.target-word-highlight,
 .target-word-highlight,
 .card .target-word-highlight,
 .card * .target-word-highlight,
@@ -876,32 +887,112 @@ span.target-word-highlight,
 .word-text.target-word-highlight {
     font-style: italic !important;
     font-weight: normal !important;
-    background-color: rgba(255, 255, 0, 0.2) !important;
-    border-radius: 3px;
-    padding: 1px 2px;
+    background-color: transparent !important;
+    border-radius: 0;
+    padding: 0;
+    text-decoration: none;
 }
 
-.ankidroid_dark_mode .target-word-highlight,
-.ankidroid_dark_mode .card .target-word-highlight,
-.ankidroid_dark_mode .card * .target-word-highlight,
-.ankidroid_dark_mode .migaku-card .target-word-highlight,
-.ankidroid_dark_mode .migaku-card * .target-word-highlight,
-.ankidroid_dark_mode .migaku-card-content .target-word-highlight,
-.ankidroid_dark_mode .migaku-card-content * .target-word-highlight,
-.ankidroid_dark_mode main.container .card .target-word-highlight,
-.ankidroid_dark_mode main.container .card * .target-word-highlight,
-.ankidroid_dark_mode span.target-word-highlight,
-.ankidroid_dark_mode .word-text.target-word-highlight,
-.nightMode .target-word-highlight,
-.nightMode .card .target-word-highlight,
-.nightMode .card * .target-word-highlight,
-.nightMode .migaku-card .target-word-highlight,
-.nightMode .migaku-card * .target-word-highlight,
-.nightMode .migaku-card-content .target-word-highlight,
-.nightMode .migaku-card-content * .target-word-highlight,
-.nightMode main.container .card .target-word-highlight,
-.nightMode main.container .card * .target-word-highlight,
-.nightMode span.target-word-highlight,
-.nightMode .word-text.target-word-highlight {
-    background-color: rgba(255, 255, 0, 0.15) !important;
+/* Target word highlighting - Alternative front side (just highlight) */
+.migaku-card-front .target-word-highlight-alt,
+.migaku-card-front .card .target-word-highlight-alt,
+.migaku-card-front .card * .target-word-highlight-alt,
+.migaku-card-front .migaku-card .target-word-highlight-alt,
+.migaku-card-front .migaku-card * .target-word-highlight-alt,
+.migaku-card-front .migaku-card-content .target-word-highlight-alt,
+.migaku-card-front .migaku-card-content * .target-word-highlight-alt,
+.migaku-card-front main.container .card .target-word-highlight-alt,
+.migaku-card-front main.container .card * .target-word-highlight-alt,
+.nightMode .migaku-card-front span.target-word-highlight-alt,
+.nightMode .migaku-card-front .word-text.target-word-highlight-alt {
+    font-style: normal !important;
+    font-weight: normal !important;
+    background-color: rgba(255, 255, 0, 0.3) !important;
+    border-radius: 3px;
+    padding: 1px 2px;
+    text-decoration: none;
+}
+
+/* Enhanced target word italic styling with higher specificity */
+.migaku-card-front .word .word-text.target-word-highlight,
+.migaku-card-front .field .word .word-text.target-word-highlight,
+.migaku-card-front .migaku-card-content .word .word-text.target-word-highlight,
+.word .word-text.target-word-highlight,
+.field .word .word-text.target-word-highlight,
+span.word-text.target-word-highlight,
+.word-text.target-word-highlight {
+    font-style: italic !important;
+    font-weight: normal !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+}
+
+/* Target word highlighting - Back side (just italic) */
+.migaku-card-back .target-word-highlight,
+.migaku-card-back .card .target-word-highlight,
+.migaku-card-back .card * .target-word-highlight,
+.migaku-card-back .migaku-card .target-word-highlight,
+.migaku-card-back .migaku-card * .target-word-highlight,
+.migaku-card-back .migaku-card-content .target-word-highlight,
+.migaku-card-back .migaku-card-content * .target-word-highlight,
+.migaku-card-back main.container .card .target-word-highlight,
+.migaku-card-back main.container .card * .target-word-highlight,
+.migaku-card-back span.target-word-highlight,
+.migaku-card-back .word-text.target-word-highlight {
+    font-style: italic !important;
+    font-weight: normal !important;
+    background-color: transparent !important;
+    border-radius: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+/* Fallback removed - merged with front side styles above */
+
+/* Dark mode - Front side alternative highlighting */
+.ankidroid_dark_mode .migaku-card-front .target-word-highlight-alt,
+.ankidroid_dark_mode .migaku-card-front .card .target-word-highlight-alt,
+.ankidroid_dark_mode .migaku-card-front .card * .target-word-highlight-alt,
+.ankidroid_dark_mode .migaku-card-front .migaku-card .target-word-highlight-alt,
+.ankidroid_dark_mode
+    .migaku-card-front
+    .migaku-card
+    *
+    .target-word-highlight-alt,
+.ankidroid_dark_mode
+    .migaku-card-front
+    .migaku-card-content
+    .target-word-highlight-alt,
+.ankidroid_dark_mode
+    .migaku-card-front
+    .migaku-card-content
+    *
+    .target-word-highlight-alt,
+.ankidroid_dark_mode
+    .migaku-card-front
+    main.container
+    .card
+    .target-word-highlight-alt,
+.ankidroid_dark_mode
+    .migaku-card-front
+    main.container
+    .card
+    *
+    .target-word-highlight-alt,
+.ankidroid_dark_mode .migaku-card-front span.target-word-highlight-alt,
+.ankidroid_dark_mode .migaku-card-front .word-text.target-word-highlight-alt,
+.nightMode .migaku-card-front .target-word-highlight-alt,
+.nightMode .migaku-card-front .card .target-word-highlight-alt,
+.nightMode .migaku-card-front .card * .target-word-highlight-alt,
+.nightMode .migaku-card-front .migaku-card .target-word-highlight-alt,
+.nightMode .migaku-card-front .migaku-card * .target-word-highlight-alt,
+.nightMode .migaku-card-front .migaku-card-content .target-word-highlight-alt,
+.nightMode .migaku-card-front .migaku-card-content * .target-word-highlight-alt,
+.nightMode .migaku-card-front main.container .card .target-word-highlight-alt,
+.nightMode .migaku-card-front main.container .card * .target-word-highlight-alt,
+.nightMode .migaku-card-front span.target-word-highlight-alt,
+.nightMode .migaku-card-front .word-text.target-word-highlight-alt {
+    background-color: rgba(255, 255, 0, 0.2) !important;
 }

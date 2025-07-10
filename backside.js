@@ -83,6 +83,12 @@
 
     (function () {
 
+        // Configuration for target word highlighting
+        const HIGHLIGHT_CONFIG = {
+            // Back side always uses italic only
+            backStyle: 'italic'
+        };
+
         const word_pos_names = {
             v: "Verb",
             adj: "Adjective",
@@ -376,6 +382,7 @@
                         }
 
                         if (isMatch) {
+                            // Back side always uses italic only
                             wordText.classList.add('target-word-highlight')
                         }
                     }
@@ -394,6 +401,48 @@
 
         // Mark target words after all fields are processed
         markTargetWordsInSentence()
+
+        // Debug function to help identify target word detection issues (can be removed in production)
+        function debugTargetWordDetection() {
+            console.log('=== DEBUG TARGET WORD DETECTION ===');
+
+            // Check card type
+            const cardTypeForm = document.querySelector('.migaku-typeselect form');
+            if (cardTypeForm) {
+                const cardType = cardTypeForm.elements["type"].value;
+                console.log('Card type:', cardType);
+            }
+
+            // Check for target word field
+            const targetWordField = document.querySelector('[data-field-type="target-word"]');
+            console.log('Target word field found:', !!targetWordField);
+            if (targetWordField) {
+                console.log('Target word field content:', targetWordField.textContent);
+            }
+
+            // Check for unknown field
+            const unknownField = document.querySelector('.migaku-card-unknown .field');
+            console.log('Unknown field found:', !!unknownField);
+            if (unknownField) {
+                console.log('Unknown field content:', unknownField.textContent);
+            }
+
+            // Check all fields
+            const allFields = document.querySelectorAll('.field');
+            console.log('Total fields found:', allFields.length);
+            allFields.forEach((field, index) => {
+                console.log(`Field ${index}:`, field.textContent?.substring(0, 100) + '...');
+            });
+
+            // Check what getTargetWordText returns
+            const detectedTarget = getTargetWordText();
+            console.log('Detected target word:', detectedTarget);
+
+            console.log('=== END DEBUG ===');
+        }
+
+        // Run debug function (comment out in production)
+        // debugTargetWordDetection();
 
         function closeAllActive() {
             const current_popups = document.querySelectorAll('.active')

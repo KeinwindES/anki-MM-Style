@@ -213,50 +213,187 @@
         }
 
         function getTargetWordText() {
+            console.log('=== FRONT SIDE TARGET WORD DETECTION ===')
+
             // First try to get from target word field (vocabulary cards)
             const targetWordField = document.querySelector('[data-field-type="target-word"]')
+            console.log('Target word field found:', !!targetWordField)
             if (targetWordField) {
                 const text = targetWordField.textContent || targetWordField.innerText || ''
                 const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
+                console.log('Target word field content:', cleanText)
                 if (cleanText) return cleanText
             }
 
-            // For sentence cards, try to get from the card type detection
-            // Check if this is a vocabulary card type
+            // For front side, we need to detect card type and handle differently
             const cardTypeForm = document.querySelector('.migaku-typeselect form')
             if (cardTypeForm) {
                 const cardType = cardTypeForm.elements["type"].value
+                console.log('Card type:', cardType)
+
+                // For vocabulary cards, the target word is shown in the main content
                 if (cardType === 'v' || cardType === 'av') {
-                    // This is a vocabulary card, target word should be available
+                    const mainField = document.querySelector('.migaku-card-content .field')
+                    console.log('Main field found:', !!mainField)
+                    if (mainField) {
+                        const text = mainField.textContent || mainField.innerText || ''
+                        const cleanText = text.replace(/\[(.*?)\]/g, '').trim()
+                        console.log('Main field content:', cleanText)
+                        if (cleanText && cleanText.length > 0) {
+                            return cleanText
+                        }
+                    }
+                }
+
+                // For sentence cards on front side, we can't determine the target word
+                // since it's not shown. We'll need to highlight nothing or use a different approach
+                if (cardType === 's' || cardType === 'as') {
+                    console.log('Sentence card - no target word available on front side')
+                    // Return null - can't determine target word on sentence card front
                     return null
                 }
             }
 
-            // For sentence cards, we can't determine target word from front side
+            console.log('No target word found')
             return null
         }
 
         function markTargetWordsInSentence() {
             const targetWordText = getTargetWordText()
-            if (!targetWordText) return
+            console.log('=== MARK TARGET WORDS DEBUG ===')
+            console.log('Target word text:', targetWordText)
+            if (!targetWordText) {
+                console.log('No target word found, skipping highlighting')
+                return
+            }
 
-            const sentenceFields = document.querySelectorAll('.field:not([data-field-type="target-word"])')
+            // For front side, get all fields including target word field
+            const allFields = document.querySelectorAll('.field')
+            console.log('Found fields:', allFields.length)
 
-            sentenceFields.forEach(field => {
+            let totalMatches = 0
+            allFields.forEach((field, fieldIndex) => {
                 const words = field.querySelectorAll('.word')
-                words.forEach(word => {
+                console.log(`Field ${fieldIndex}: Found ${words.length} words`)
+
+                words.forEach((word, wordIndex) => {
                     const wordText = word.querySelector('.word-text')
                     if (wordText) {
                         // More flexible matching - check if target word is contained in the word
                         const wordContent = wordText.textContent.toLowerCase().trim()
                         const targetContent = targetWordText.toLowerCase().trim()
 
-                        if (wordContent === targetContent ||
-                            (wordContent.includes(targetContent) && targetContent.length > 2)) {
+                        console.log(`  Word ${wordIndex}: "${wordContent}" vs target "${targetContent}"`)
+
+                        // Split target word by spaces to handle multi-word targets
+                        const targetWords = targetContent.split(/\s+/)
+
+                        // Check for exact match or partial match
+                        let isMatch = false
+                        let matchType = ''
+
+                        // Exact match
+                        if (wordContent === targetContent) {
+                            isMatch = true
+                            matchType = 'exact'
+                        }
+
+                        // Check each word in target phrase
+                        if (!isMatch) {
+                            targetWords.forEach(targetWord => {
+                                if (targetWord.length > 2) {
+                                    if (wordContent === targetWord) {
+                                        isMatch = true
+                                        matchType = 'word-exact'
+                                    } else if (wordContent.includes(targetWord) && targetWord.length > 2) {
+                                        isMatch = true
+                                        matchType = 'word-contains'
+                                    } else if (targetWord.includes(wordContent) && wordContent.length > 2) {
+                                        isMatch = true
+                                        matchType = 'word-contained'
+                                    }
+                                }
+                            })
+                        }
+
+                        // For German, also check without case endings
+                        if (!isMatch && targetContent.length > 3) {
+                            // Remove common German endings for better matching
+                            const germanWordStem = wordContent.replace(/(en|er|es|e|n|s)$/, '')
+                            const targetStem = targetContent.replace(/(en|er|es|e|n|s)$/, '')
+
+                            if (germanWordStem.length > 2 && targetStem.length > 2) {
+                                if (germanWordStem === targetStem) {
+                                    isMatch = true
+                                    matchType = 'german-stem-exact'
+                                } else if (germanWordStem.includes(targetStem) && targetStem.length > 2) {
+                                    isMatch = true
+                                    matchType = 'german-stem-contains'
+                                } else if (targetStem.includes(germanWordStem) && germanWordStem.length > 2) {
+                                    isMatch = true
+                                    matchType = 'german-stem-contained'
+                                }
+                            }
+                        }
+
+                        if (isMatch) {
+                            console.log(`    ✓ MATCH! Type: ${matchType}, Adding target-word-highlight class`)
                             wordText.classList.add('target-word-highlight')
+
+                            // Debug: Check if class was actually added
+                            const hasClass = wordText.classList.contains('target-word-highlight')
+                            console.log(`    Class added successfully: ${hasClass}`)
+
+                            // Debug: Check computed styles
+                            const computedStyle = window.getComputedStyle(wordText)
+                            console.log(`    Computed font-style: ${computedStyle.fontStyle}`)
+
+                            // JavaScript fallback: Set italic style directly
+                            wordText.style.fontStyle = 'italic'
+                            wordText.style.fontWeight = 'normal'
+                            console.log(`    Fallback: Applied italic style directly`)
+
+                            totalMatches++
+                        } else {
+                            console.log(`    ✗ No match for "${wordContent}"`)
                         }
                     }
                 })
+            })
+
+            console.log(`=== TOTAL MATCHES: ${totalMatches} ===`)
+        }
+
+        function debugHtmlStructure() {
+            console.log('=== HTML STRUCTURE DEBUG ===')
+
+            // Check for migaku-card-front class
+            const cardFront = document.querySelector('.migaku-card-front')
+            console.log('Has .migaku-card-front:', !!cardFront)
+
+            // Check all fields
+            const allFields = document.querySelectorAll('.field')
+            console.log('Total fields found:', allFields.length)
+
+            allFields.forEach((field, index) => {
+                console.log(`Field ${index}:`)
+                console.log('  - innerHTML preview:', field.innerHTML.substring(0, 100) + '...')
+                console.log('  - has .word elements:', field.querySelectorAll('.word').length)
+
+                const words = field.querySelectorAll('.word')
+                words.forEach((word, wordIndex) => {
+                    const wordText = word.querySelector('.word-text')
+                    if (wordText) {
+                        console.log(`    Word ${wordIndex}: "${wordText.textContent}" - classes: ${wordText.className}`)
+                    }
+                })
+            })
+
+            // Check for any existing target-word-highlight elements
+            const highlighted = document.querySelectorAll('.target-word-highlight')
+            console.log('Elements with target-word-highlight class:', highlighted.length)
+            highlighted.forEach((el, index) => {
+                console.log(`  ${index}: "${el.textContent}" - style: ${el.style.cssText}`)
             })
         }
 
@@ -268,6 +405,23 @@
 
         // Mark target words after all fields are processed
         markTargetWordsInSentence()
+
+        // Debug HTML structure
+        debugHtmlStructure()
+
+        // Debug: Check if we're on a vocabulary card and show target word
+        const cardTypeForm = document.querySelector('.migaku-typeselect form')
+        if (cardTypeForm) {
+            const cardType = cardTypeForm.elements["type"].value
+            console.log('DEBUG: Card type is:', cardType)
+
+            if (cardType === 'v' || cardType === 'av') {
+                const targetField = document.querySelector('[data-field-type="target-word"]')
+                if (targetField) {
+                    console.log('DEBUG: Target word field content:', targetField.textContent)
+                }
+            }
+        }
 
 
 
