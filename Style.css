@@ -6,18 +6,18 @@
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
 }
 
 main.container {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     width: 100vw;
 }
 
 main.container #qa {
-    margin-top: 0;
+    margin-top: 0px;
 }
 
 main.container .card {
@@ -29,19 +29,19 @@ main.container .card audio {
 }
 
 #content {
-    margin: 0;
+    margin: 0px;
 }
 
 .card,
 .card * {
     box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
     font-family: cardFont, sans-serif;
 }
 
 .card {
-    background: white;
+    background: #e5f9ff;
     font-size: 18px;
     font-smooth: always;
     color: rgb(40, 40, 50);
@@ -49,16 +49,33 @@ main.container .card audio {
     width: 100%;
 }
 
+.migaku-header {
+    background: #2880ff;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.migaku-header h1 {
+    color: white;
+}
+
+.migaku-logo {
+    height: 35px;
+    margin: 5px;
+}
+
 .migaku-card,
 .migaku-typeselect {
     position: relative;
     background: white;
-    border: 1px solid black;
     width: 90%;
     max-width: 650px;
     margin: 20px auto 50px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
     text-align: left;
 }
 
@@ -82,7 +99,7 @@ main.container .card audio {
 
 .sentence-separator {
     width: 100%;
-    margin: 15px 0;
+    margin: 15px 0px;
     border-color: rgb(220, 220, 220);
 }
 
@@ -138,8 +155,8 @@ main.container .card audio {
 }
 
 .migaku-card-images {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -180,6 +197,38 @@ main.container .card audio {
     font-family: sans-serif;
 }
 
+.ankidroid_dark_mode .migaku-header,
+.nightMode .migaku-header {
+    background: #f9a746;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ankidroid_dark_mode.card,
+.nightMode.card {
+    color: rgb(245, 245, 255);
+    background: #2b303b;
+}
+
+.ankidroid_dark_mode .migaku-card-translation,
+.nightMode.card .migaku-card-translation,
+.ankidroid_dark_mode .migaku-card-examples,
+.nightMode.card .migaku-card-examples {
+    color: rgba(230, 230, 255, 0.65);
+}
+
+.ankidroid_dark_mode .migaku-card,
+.nightMode .migaku-card,
+.ankidroid_dark_mode .migaku-typeselect,
+.nightMode .migaku-typeselect {
+    background: #363c4a;
+    box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.15);
+}
+
+.ankidroid_dark_mode .sentence-separator,
+.nightMode .sentence-separator {
+    border-color: rgb(175, 175, 175);
+}
+
 .replay-button {
     height: 25px;
 }
@@ -194,7 +243,6 @@ t {
     font-weight: bold;
 }
 
-/* Media queries */
 @media (min-width: 762px) {
     .migaku-header {
         justify-content: start;
@@ -203,13 +251,14 @@ t {
 }
 
 @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
     .migaku-card,
     .migaku-typeselect {
         width: 96%;
     }
 }
 
-/* German support - Popup functionality */
+/*###MIGAKU GERMAN SUPPORT CSS STARTS###*/
 .word {
     position: relative;
 }
@@ -217,12 +266,22 @@ t {
 .popup {
     visibility: hidden;
     position: absolute;
+
     z-index: 100;
+
     padding: 7px;
     border-radius: 5px;
+
     text-align: left;
+
     background-color: #e5f9ff;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+.nightMode .popup,
+.ankidroid_dark_mode .popup {
+    color: #ffffff;
+    background-color: #2b303b;
 }
 
 .popup-active .popup {
@@ -260,6 +319,11 @@ t {
     border-bottom: none;
 }
 
+.nightMode .popup-direction-u .popup:after,
+.ankidroid_dark_mode .popup-direction-u .popup:after {
+    border-top: 10px solid #2b303b;
+}
+
 .popup-direction-d .popup:after {
     content: " ";
     position: absolute;
@@ -269,6 +333,11 @@ t {
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
     border-bottom: 10px solid #e5f9ff;
+}
+
+.nightMode .popup-direction-d .popup:after,
+.ankidroid_dark_mode .popup-direction-d .popup:after {
+    border-bottom: 10px solid #2b303b;
 }
 
 .popup-direction-l .popup:after {
@@ -282,6 +351,11 @@ t {
     border-bottom: 10px solid transparent;
 }
 
+.nightMode .popup-direction-l .popup:after,
+.ankidroid_dark_mode .popup-direction-l .popup:after {
+    border-left: 10px solid #2b303b;
+}
+
 .popup-direction-r .popup:after {
     content: " ";
     position: absolute;
@@ -291,6 +365,11 @@ t {
     border-right: 10px solid #e5f9ff;
     border-left: none;
     border-bottom: 10px solid transparent;
+}
+
+.nightMode .popup-direction-r .popup:after,
+.ankidroid_dark_mode .popup-direction-r .popup:after {
+    border-right: 10px solid #2b303b;
 }
 
 .popup-hover-box {
@@ -344,12 +423,12 @@ t {
 
 .word-gender-symbol-m::before {
     content: "\2642";
-    color: #00a2ff;
+    color: #005ce6;
 }
 
 .word-gender-symbol-f::before {
     content: "\2640";
-    color: #ff69b4;
+    color: #e60000;
 }
 
 .word-gender-symbol-n::before {
@@ -367,444 +446,18 @@ t {
     font-size: 25px;
 }
 
-/* Gender color coding and typography */
-/* Masculine words - blue and bold */
 .gender-m,
-.gender-hover-m,
-.card .gender-m,
-.card .gender-hover-m,
-.card * .gender-m,
-.card * .gender-hover-m,
-.migaku-card .gender-m,
-.migaku-card .gender-hover-m,
-.migaku-card * .gender-m,
-.migaku-card * .gender-hover-m,
-.migaku-card-content .gender-m,
-.migaku-card-content .gender-hover-m,
-.migaku-card-content * .gender-m,
-.migaku-card-content * .gender-hover-m,
-main.container .card .gender-m,
-main.container .card .gender-hover-m,
-main.container .card * .gender-m,
-main.container .card * .gender-hover-m,
-span.gender-m,
-span.gender-hover-m,
-.word-text.gender-m,
-.word-text.gender-hover-m {
-    color: #00a2ff !important;
-    text-shadow: 0 0 1px #00a2ff;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-weight: bold !important;
+.word.active .gender-hover-m {
+    color: #005ce6;
 }
 
-/* Feminine words - pink and bold */
 .gender-f,
-.gender-hover-f,
-.card .gender-f,
-.card .gender-hover-f,
-.card * .gender-f,
-.card * .gender-hover-f,
-.migaku-card .gender-f,
-.migaku-card .gender-hover-f,
-.migaku-card * .gender-f,
-.migaku-card * .gender-hover-f,
-.migaku-card-content .gender-f,
-.migaku-card-content .gender-hover-f,
-.migaku-card-content * .gender-f,
-.migaku-card-content * .gender-hover-f,
-main.container .card .gender-f,
-main.container .card .gender-hover-f,
-main.container .card * .gender-f,
-main.container .card * .gender-hover-f,
-span.gender-f,
-span.gender-hover-f,
-.word-text.gender-f,
-.word-text.gender-hover-f {
-    color: #ff69b4 !important;
-    text-shadow: 0 0 1px #ff69b4;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-weight: bold !important;
+.word.active .gender-hover-f {
+    color: #e60000;
 }
 
-/* Neuter words - gray and bold */
 .gender-n,
-.gender-hover-n,
-.card .gender-n,
-.card .gender-hover-n,
-.card * .gender-n,
-.card * .gender-hover-n,
-.migaku-card .gender-n,
-.migaku-card .gender-hover-n,
-.migaku-card * .gender-n,
-.migaku-card * .gender-hover-n,
-.migaku-card-content .gender-n,
-.migaku-card-content .gender-hover-n,
-.migaku-card-content * .gender-n,
-.migaku-card-content * .gender-hover-n,
-main.container .card .gender-n,
-main.container .card .gender-hover-n,
-main.container .card * .gender-n,
-main.container .card * .gender-hover-n,
-span.gender-n,
-span.gender-hover-n,
-.word-text.gender-n,
-.word-text.gender-hover-n {
-    color: #808080 !important;
-    text-shadow: 0 0 1px #808080;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-weight: bold !important;
+.word.active .gender-hover-n {
+    color: #808080;
 }
-
-/* Verbs - gray and italic */
-.gender-v,
-.gender-hover-v,
-.card .gender-v,
-.card .gender-hover-v,
-.card * .gender-v,
-.card * .gender-hover-v,
-.migaku-card .gender-v,
-.migaku-card .gender-hover-v,
-.migaku-card * .gender-v,
-.migaku-card * .gender-hover-v,
-.migaku-card-content .gender-v,
-.migaku-card-content .gender-hover-v,
-.migaku-card-content * .gender-v,
-.migaku-card-content * .gender-hover-v,
-main.container .card .gender-v,
-main.container .card .gender-hover-v,
-main.container .card * .gender-v,
-main.container .card * .gender-hover-v,
-span.gender-v,
-span.gender-hover-v,
-.word-text.gender-v,
-.word-text.gender-hover-v {
-    color: #808080 !important;
-    text-shadow: 0 0 1px #808080;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-style: italic !important;
-}
-
-/* Adjectives - gray, bold and italic */
-.pos-adj,
-.gender-adj,
-.pos-hover-adj,
-.gender-hover-adj,
-.card .pos-adj,
-.card .gender-adj,
-.card .pos-hover-adj,
-.card .gender-hover-adj,
-.card * .pos-adj,
-.card * .gender-adj,
-.card * .pos-hover-adj,
-.card * .gender-hover-adj,
-.migaku-card .pos-adj,
-.migaku-card .gender-adj,
-.migaku-card .pos-hover-adj,
-.migaku-card .gender-hover-adj,
-.migaku-card * .pos-adj,
-.migaku-card * .gender-adj,
-.migaku-card * .pos-hover-adj,
-.migaku-card * .gender-hover-adj,
-.migaku-card-content .pos-adj,
-.migaku-card-content .gender-adj,
-.migaku-card-content .pos-hover-adj,
-.migaku-card-content .gender-hover-adj,
-.migaku-card-content * .pos-adj,
-.migaku-card-content * .gender-adj,
-.migaku-card-content * .pos-hover-adj,
-.migaku-card-content * .gender-hover-adj,
-main.container .card .pos-adj,
-main.container .card .gender-adj,
-main.container .card .pos-hover-adj,
-main.container .card .gender-hover-adj,
-main.container .card * .pos-adj,
-main.container .card * .gender-adj,
-main.container .card * .pos-hover-adj,
-main.container .card * .gender-hover-adj,
-span.pos-adj,
-span.gender-adj,
-span.pos-hover-adj,
-span.gender-hover-adj,
-.word-text.pos-adj,
-.word-text.gender-adj,
-.word-text.pos-hover-adj,
-.word-text.gender-hover-adj {
-    color: #808080 !important;
-    text-shadow: 0 0 1px #808080;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-weight: bold !important;
-    font-style: italic !important;
-}
-
-/* All other non-gendered words - gray */
-.gender-missing,
-.gender-hover-missing,
-.card .gender-missing,
-.card .gender-hover-missing,
-.card * .gender-missing,
-.card * .gender-hover-missing,
-.migaku-card .gender-missing,
-.migaku-card .gender-hover-missing,
-.migaku-card * .gender-missing,
-.migaku-card * .gender-hover-missing,
-.migaku-card-content .gender-missing,
-.migaku-card-content .gender-hover-missing,
-.migaku-card-content * .gender-missing,
-.migaku-card-content * .gender-hover-missing,
-main.container .card .gender-missing,
-main.container .card .gender-hover-missing,
-main.container .card * .gender-missing,
-main.container .card * .gender-hover-missing,
-span.gender-missing,
-span.gender-hover-missing,
-.word-text.gender-missing,
-.word-text.gender-hover-missing {
-    color: #808080 !important;
-    text-shadow: 0 0 1px #808080;
-    border-radius: 3px;
-    padding: 1px 2px;
-}
-
-/* Target word styling - inherits POS formatting and adds underline */
-/* Target masculine nouns - blue, bold, underline */
-.target-word-highlight.gender-m,
-.target-word-highlight.gender-hover-m,
-.card .target-word-highlight.gender-m,
-.card .target-word-highlight.gender-hover-m,
-.card * .target-word-highlight.gender-m,
-.card * .target-word-highlight.gender-hover-m,
-.migaku-card .target-word-highlight.gender-m,
-.migaku-card .target-word-highlight.gender-hover-m,
-.migaku-card * .target-word-highlight.gender-m,
-.migaku-card * .target-word-highlight.gender-hover-m,
-.migaku-card-content .target-word-highlight.gender-m,
-.migaku-card-content .target-word-highlight.gender-hover-m,
-.migaku-card-content * .target-word-highlight.gender-m,
-.migaku-card-content * .target-word-highlight.gender-hover-m,
-main.container .card .target-word-highlight.gender-m,
-main.container .card .target-word-highlight.gender-hover-m,
-main.container .card * .target-word-highlight.gender-m,
-main.container .card * .target-word-highlight.gender-hover-m,
-span.target-word-highlight.gender-m,
-span.target-word-highlight.gender-hover-m,
-.word-text.target-word-highlight.gender-m,
-.word-text.target-word-highlight.gender-hover-m {
-    color: #00a2ff !important;
-    text-shadow: 0 0 1px #00a2ff;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-weight: bold !important;
-    text-decoration: underline !important;
-}
-
-/* Target feminine nouns - pink, bold, underline */
-.target-word-highlight.gender-f,
-.target-word-highlight.gender-hover-f,
-.card .target-word-highlight.gender-f,
-.card .target-word-highlight.gender-hover-f,
-.card * .target-word-highlight.gender-f,
-.card * .target-word-highlight.gender-hover-f,
-.migaku-card .target-word-highlight.gender-f,
-.migaku-card .target-word-highlight.gender-hover-f,
-.migaku-card * .target-word-highlight.gender-f,
-.migaku-card * .target-word-highlight.gender-hover-f,
-.migaku-card-content .target-word-highlight.gender-f,
-.migaku-card-content .target-word-highlight.gender-hover-f,
-.migaku-card-content * .target-word-highlight.gender-f,
-.migaku-card-content * .target-word-highlight.gender-hover-f,
-main.container .card .target-word-highlight.gender-f,
-main.container .card .target-word-highlight.gender-hover-f,
-main.container .card * .target-word-highlight.gender-f,
-main.container .card * .target-word-highlight.gender-hover-f,
-span.target-word-highlight.gender-f,
-span.target-word-highlight.gender-hover-f,
-.word-text.target-word-highlight.gender-f,
-.word-text.target-word-highlight.gender-hover-f {
-    color: #ff69b4 !important;
-    text-shadow: 0 0 1px #ff69b4;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-weight: bold !important;
-    text-decoration: underline !important;
-}
-
-/* Target neuter nouns - gray, bold, underline */
-.target-word-highlight.gender-n,
-.target-word-highlight.gender-hover-n,
-.card .target-word-highlight.gender-n,
-.card .target-word-highlight.gender-hover-n,
-.card * .target-word-highlight.gender-n,
-.card * .target-word-highlight.gender-hover-n,
-.migaku-card .target-word-highlight.gender-n,
-.migaku-card .target-word-highlight.gender-hover-n,
-.migaku-card * .target-word-highlight.gender-n,
-.migaku-card * .target-word-highlight.gender-hover-n,
-.migaku-card-content .target-word-highlight.gender-n,
-.migaku-card-content .target-word-highlight.gender-hover-n,
-.migaku-card-content * .target-word-highlight.gender-n,
-.migaku-card-content * .target-word-highlight.gender-hover-n,
-main.container .card .target-word-highlight.gender-n,
-main.container .card .target-word-highlight.gender-hover-n,
-main.container .card * .target-word-highlight.gender-n,
-main.container .card * .target-word-highlight.gender-hover-n,
-span.target-word-highlight.gender-n,
-span.target-word-highlight.gender-hover-n,
-.word-text.target-word-highlight.gender-n,
-.word-text.target-word-highlight.gender-hover-n {
-    color: #808080 !important;
-    text-shadow: 0 0 1px #808080;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-weight: bold !important;
-    text-decoration: underline !important;
-}
-
-/* Target verbs - gray, italic, underline */
-.target-word-highlight.gender-v,
-.target-word-highlight.gender-hover-v,
-.card .target-word-highlight.gender-v,
-.card .target-word-highlight.gender-hover-v,
-.card * .target-word-highlight.gender-v,
-.card * .target-word-highlight.gender-hover-v,
-.migaku-card .target-word-highlight.gender-v,
-.migaku-card .target-word-highlight.gender-hover-v,
-.migaku-card * .target-word-highlight.gender-v,
-.migaku-card * .target-word-highlight.gender-hover-v,
-.migaku-card-content .target-word-highlight.gender-v,
-.migaku-card-content .target-word-highlight.gender-hover-v,
-.migaku-card-content * .target-word-highlight.gender-v,
-.migaku-card-content * .target-word-highlight.gender-hover-v,
-main.container .card .target-word-highlight.gender-v,
-main.container .card .target-word-highlight.gender-hover-v,
-main.container .card * .target-word-highlight.gender-v,
-main.container .card * .target-word-highlight.gender-hover-v,
-span.target-word-highlight.gender-v,
-span.target-word-highlight.gender-hover-v,
-.word-text.target-word-highlight.gender-v,
-.word-text.target-word-highlight.gender-hover-v {
-    color: #808080 !important;
-    text-shadow: 0 0 1px #808080;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-style: italic !important;
-    text-decoration: underline !important;
-}
-
-/* Target adjectives - gray, bold, italic, underline */
-.target-word-highlight.pos-adj,
-.target-word-highlight.gender-adj,
-.target-word-highlight.pos-hover-adj,
-.target-word-highlight.gender-hover-adj,
-.card .target-word-highlight.pos-adj,
-.card .target-word-highlight.gender-adj,
-.card .target-word-highlight.pos-hover-adj,
-.card .target-word-highlight.gender-hover-adj,
-.card * .target-word-highlight.pos-adj,
-.card * .target-word-highlight.gender-adj,
-.card * .target-word-highlight.pos-hover-adj,
-.card * .target-word-highlight.gender-hover-adj,
-.migaku-card .target-word-highlight.pos-adj,
-.migaku-card .target-word-highlight.gender-adj,
-.migaku-card .target-word-highlight.pos-hover-adj,
-.migaku-card .target-word-highlight.gender-hover-adj,
-.migaku-card * .target-word-highlight.pos-adj,
-.migaku-card * .target-word-highlight.gender-adj,
-.migaku-card * .target-word-highlight.pos-hover-adj,
-.migaku-card * .target-word-highlight.gender-hover-adj,
-.migaku-card-content .target-word-highlight.pos-adj,
-.migaku-card-content .target-word-highlight.gender-adj,
-.migaku-card-content .target-word-highlight.pos-hover-adj,
-.migaku-card-content .target-word-highlight.gender-hover-adj,
-.migaku-card-content * .target-word-highlight.pos-adj,
-.migaku-card-content * .target-word-highlight.gender-adj,
-.migaku-card-content * .target-word-highlight.pos-hover-adj,
-.migaku-card-content * .target-word-highlight.gender-hover-adj,
-main.container .card .target-word-highlight.pos-adj,
-main.container .card .target-word-highlight.gender-adj,
-main.container .card .target-word-highlight.pos-hover-adj,
-main.container .card .target-word-highlight.gender-hover-adj,
-main.container .card * .target-word-highlight.pos-adj,
-main.container .card * .target-word-highlight.gender-adj,
-main.container .card * .target-word-highlight.pos-hover-adj,
-main.container .card * .target-word-highlight.gender-hover-adj,
-span.target-word-highlight.pos-adj,
-span.target-word-highlight.gender-adj,
-span.target-word-highlight.pos-hover-adj,
-span.target-word-highlight.gender-hover-adj,
-.word-text.target-word-highlight.pos-adj,
-.word-text.target-word-highlight.gender-adj,
-.word-text.target-word-highlight.pos-hover-adj,
-.word-text.target-word-highlight.gender-hover-adj {
-    color: #808080 !important;
-    text-shadow: 0 0 1px #808080;
-    border-radius: 3px;
-    padding: 1px 2px;
-    font-weight: bold !important;
-    font-style: italic !important;
-    text-decoration: underline !important;
-}
-
-/* Target other words - gray, underline */
-.target-word-highlight.gender-missing,
-.target-word-highlight.gender-hover-missing,
-.card .target-word-highlight.gender-missing,
-.card .target-word-highlight.gender-hover-missing,
-.card * .target-word-highlight.gender-missing,
-.card * .target-word-highlight.gender-hover-missing,
-.migaku-card .target-word-highlight.gender-missing,
-.migaku-card .target-word-highlight.gender-hover-missing,
-.migaku-card * .target-word-highlight.gender-missing,
-.migaku-card * .target-word-highlight.gender-hover-missing,
-.migaku-card-content .target-word-highlight.gender-missing,
-.migaku-card-content .target-word-highlight.gender-hover-missing,
-.migaku-card-content * .target-word-highlight.gender-missing,
-.migaku-card-content * .target-word-highlight.gender-hover-missing,
-main.container .card .target-word-highlight.gender-missing,
-main.container .card .target-word-highlight.gender-hover-missing,
-main.container .card * .target-word-highlight.gender-missing,
-main.container .card * .target-word-highlight.gender-hover-missing,
-span.target-word-highlight.gender-missing,
-span.target-word-highlight.gender-hover-missing,
-.word-text.target-word-highlight.gender-missing,
-.word-text.target-word-highlight.gender-hover-missing {
-    color: #808080 !important;
-    text-shadow: 0 0 1px #808080;
-    border-radius: 3px;
-    padding: 1px 2px;
-    text-decoration: underline !important;
-}
-
-/* Fallback target word styling for words without specific gender/POS - just underline */
-.target-word-highlight,
-.card .target-word-highlight,
-.card * .target-word-highlight,
-.migaku-card .target-word-highlight,
-.migaku-card * .target-word-highlight,
-.migaku-card-content .target-word-highlight,
-.migaku-card-content * .target-word-highlight,
-main.container .card .target-word-highlight,
-main.container .card * .target-word-highlight,
-span.target-word-highlight,
-.word-text.target-word-highlight {
-    text-decoration: underline !important;
-}
-
-/* Copyright and branding */
-.migaku-card {
-    position: relative;
-}
-
-.migaku-copyright {
-    position: absolute;
-    right: 15px;
-    bottom: 10px;
-    color: rgba(128, 128, 128, 0.6);
-    font-size: 11px;
-    font-weight: normal;
-    pointer-events: none;
-}
+/*###MIGAKU GERMAN SUPPORT CSS ENDS###*/
