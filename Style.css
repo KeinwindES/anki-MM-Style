@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: cardFont;
-    src: url("/_NotoSerif.ttf");
+    src: url("BeautifulPoliceOfficer-rvv8x.ttf");
 }
 
 body {
@@ -47,24 +47,6 @@ main.container .card audio {
     color: rgb(40, 40, 50);
     height: 100%;
     width: 100%;
-}
-
-.migaku-header {
-    background: #2880ff;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.migaku-header h1 {
-    color: white;
-}
-
-.migaku-logo {
-    height: 35px;
-    margin: 5px;
 }
 
 .migaku-card,
@@ -422,12 +404,12 @@ t {
 }
 
 .word-gender-symbol-m::before {
-    content: "\2642";
+    // bubblegum blue
     color: #005ce6;
 }
 
 .word-gender-symbol-f::before {
-    content: "\2640";
+    // bubblegum pink colour;
     color: #e60000;
 }
 
@@ -441,6 +423,57 @@ t {
     color: #ac80ff;
 }
 
+// verb-before
+.word-gender-symbol-v::before {
+    content: "\26AA";
+    font-style: italic;
+}
+
+// noun-before
+.word-gender-symbol-nn::before {
+    content: "\26AA";
+    font-style: italic;
+
+}
+
+// adjective-before
+.word-gender-symbol-adj::before {
+    content: "\26AA";
+    font-style: italic;
+    font-weight: bold;
+}
+
+// verb-after
+.word-gender-symbol-v::after {
+    content: "\26AA";
+    font-style: italic;
+}
+
+// noun-after
+.word-gender-symbol-nn::after {
+    content: "\26AA";
+    font-style: italic;
+}
+
+// adjective-after
+.word-gender-symbol-adj::after {
+    content: "\26AA";
+    font-style: italic;
+    font-weight: bold;
+}
+
+// target word-before
+.word-gender-symbol-target::before {
+    content: "\26AA";
+    font-style: underline;
+}
+
+// target word-after
+.word-gender-symbol-target::after {
+    content: "\26AA";
+    font-style: underline;
+}
+
 .dict-form {
     margin-top: 5px;
     font-size: 25px;
@@ -448,11 +481,13 @@ t {
 
 .gender-m,
 .word.active .gender-hover-m {
+    // bubblegum blue
     color: #005ce6;
 }
 
 .gender-f,
 .word.active .gender-hover-f {
+    // bubblegum pink colour;
     color: #e60000;
 }
 
