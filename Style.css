@@ -423,62 +423,26 @@ t {
     color: #ac80ff;
 }
 
-// verb-before
-.word-gender-symbol-v::before {
-    content: "\26AA";
-    font-style: italic;
-}
-
-// noun-before
-.word-gender-symbol-nn::before {
-    content: "\26AA";
-    font-style: italic;
-
-}
-
-// adjective-before
-.word-gender-symbol-adj::before {
-    content: "\26AA";
-    font-style: italic;
-    font-weight: bold;
-}
-
-// verb-after
-.word-gender-symbol-v::after {
-    content: "\26AA";
-    font-style: italic;
-}
-
-// noun-after
-.word-gender-symbol-nn::after {
-    content: "\26AA";
-    font-style: italic;
-}
-
-// adjective-after
-.word-gender-symbol-adj::after {
-    content: "\26AA";
-    font-style: italic;
-    font-weight: bold;
-}
-
-// target word-before
-.word-gender-symbol-target::before {
-    content: "\26AA";
-    font-style: underline;
-}
-
-// target word-after
-.word-gender-symbol-target::after {
-    content: "\26AA";
-    font-style: underline;
-}
-
 .dict-form {
     margin-top: 5px;
     font-size: 25px;
 }
+//syntax
+.syntax-nn,
+.word:active .syntax-hover-nn{
+    text-wrap-style: italic;
+}
+.syntax-adj,
+.word:active .syntax-hover-adj{
+    text-wrap-style: italic;
+    text-weight: bold;
+}
+.syntax-v,
+.word:active .syntax-hover-v{
+    text-weight: bold;
+}
 
+//gender
 .gender-m,
 .word.active .gender-hover-m {
     // bubblegum blue
@@ -495,4 +459,11 @@ t {
 .word.active .gender-hover-n {
     color: #808080;
 }
+
+// target word
+.target-word,
+.word:active{
+    text-decoration: underline;
+}
+
 /*###MIGAKU GERMAN SUPPORT CSS ENDS###*/
