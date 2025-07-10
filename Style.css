@@ -1,8 +1,7 @@
-/* Core Card Styling */
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
 }
 
 main.container {
@@ -16,7 +15,7 @@ main.container #qa {
 }
 
 main.container .card {
-    text-align: left;
+    background-color: #fff;
 }
 
 main.container .card audio {
@@ -24,51 +23,50 @@ main.container .card audio {
 }
 
 #content {
-    margin: 10px 0;
+    text-align: left;
 }
 
 .card,
 .card * {
+    color: #333;
+    font-family: Arial, sans-serif;
     font-size: 16px;
     line-height: 1.4;
-    color: #333;
-    font-weight: normal;
-    text-decoration: none;
-    font-style: normal;
 }
 
 .card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
     margin: 10px 0;
 }
 
-/* Migaku Card Structure */
 .migaku-card,
 .migaku-typeselect {
-    background: #fff;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 10px 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
     font-size: 16px;
-    line-height: 1.6;
-    color: #333;
+    line-height: 1.5;
 }
 
 .migaku-card-front .migaku-card-content {
-    padding: 15px;
-    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 15px;
 }
 
 .migaku-card-back .migaku-card-content {
-    padding: 15px;
-    text-align: left;
-    border-top: 1px solid #eee;
-    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #dee2e6;
 }
 
 .migaku-indented {
@@ -76,44 +74,46 @@ main.container .card audio {
 }
 
 .sentence-separator {
-    border-bottom: 1px solid #ddd;
-    margin: 15px 0;
-    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0;
+    padding-bottom: 5px;
 }
 
 .migaku-card-sentence {
     font-size: 18px;
-    line-height: 1.5;
-    margin: 10px 0;
+    line-height: 1.6;
+    margin: 15px 0;
+    padding: 10px;
 }
 
 .migaku-card-unknown {
-    color: #666;
-    font-style: italic;
+    color: #dc3545;
+    font-weight: bold;
 }
 
 .migaku-card-translation,
 .migaku-card-examples {
-    margin: 10px 0;
-    padding: 10px;
+    margin-top: 10px;
+    padding: 8px;
 }
 
 .migaku-card-translation,
 .migaku-card-sentence-audio {
-    background: #f8f9fa;
-    border-radius: 4px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
 }
 
 .migaku-card-sentence-audio,
 .migaku-card-unknown-audio {
-    display: inline-block;
-    margin: 5px;
-    padding: 5px 10px;
-    border-radius: 4px;
+    text-align: center;
+    margin: 10px 0;
+    padding: 5px;
 }
 
 .migaku-card-sentence-audio {
-    background: #e9ecef;
+    background-color: #f8f9fa;
 }
 
 .migaku-card-screenshot,
@@ -121,9 +121,9 @@ main.container .card audio {
     text-align: center;
     margin: 15px 0;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: #f8f9fa;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
 }
 
 .migaku-card-screenshot br,
@@ -134,8 +134,8 @@ main.container .card audio {
 .migaku-card-images {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: center;
+    gap: 10px;
 }
 
 .migaku-card-screenshot img {
@@ -144,7 +144,7 @@ main.container .card audio {
 }
 
 .migaku-card-images img {
-    max-width: 150px;
+    max-width: 200px;
     height: auto;
 }
 
@@ -159,7 +159,8 @@ main.container .card audio {
 .migaku-card-definitions {
     margin: 10px 0;
     padding: 8px;
-    border-radius: 4px;
+    border-left: 3px solid #007bff;
+    background-color: #f8f9fa;
 }
 
 .migaku-typeselect {
@@ -169,79 +170,50 @@ main.container .card audio {
 .migaku-typeselect label {
     display: block;
     margin: 5px 0;
+    font-weight: bold;
+}
+
+.replay-button {
     cursor: pointer;
 }
 
-/* Dark Mode Base */
-.ankidroid_dark_mode .migaku-header,
-.nightMode .migaku-header {
-    background: #2c3e50;
-    color: #ecf0f1;
+.playImage {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
 }
 
-.ankidroid_dark_mode.card,
-.nightMode.card {
-    background: #2c3e50;
-    color: #ecf0f1;
+t {
+    font-size: 14px;
 }
 
-.ankidroid_dark_mode .migaku-card-translation,
-.nightMode .migaku-card-translation,
-.ankidroid_dark_mode .migaku-card-examples,
-.nightMode .migaku-card-examples {
-    background: #34495e;
-    color: #ecf0f1;
-}
-
-.ankidroid_dark_mode .migaku-card,
-.nightMode .migaku-card,
-.ankidroid_dark_mode .migaku-typeselect,
-.nightMode .migaku-typeselect {
-    background: #2c3e50;
-    color: #ecf0f1;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.ankidroid_dark_mode .sentence-separator,
-.nightMode .sentence-separator {
-    border-bottom-color: #34495e;
-}
-
-/* Media Queries */
 @media (min-width: 762px) {
     .migaku-header {
         font-size: 24px;
+        margin-bottom: 20px;
     }
 }
 
 @media only screen and (max-width: 768px) {
     .migaku-card,
     .migaku-typeselect {
-        padding: 15px;
+        font-size: 14px;
     }
 }
 
-/* Word and Popup Styling */
 .word {
     cursor: pointer;
 }
 
 .popup {
     position: absolute;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     padding: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     display: none;
-}
-
-.nightMode .popup,
-.ankidroid_dark_mode .popup {
-    background: #2c3e50;
-    border-color: #34495e;
-    color: #ecf0f1;
 }
 
 .popup-active .popup {
@@ -250,38 +222,33 @@ main.container .card audio {
 
 .popup-direction-u .popup {
     bottom: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .popup-direction-d .popup {
     top: 100%;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .popup-direction-l .popup {
     right: 100%;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .popup-direction-r .popup {
     left: 100%;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
-/* Popup Arrows */
 .popup-direction-u .popup:after {
     content: "";
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-top-color: #fff;
-}
-
-.nightMode .popup-direction-u .popup:after,
-.ankidroid_dark_mode .popup-direction-u .popup:after {
-    border-top-color: #2c3e50;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
 }
 
 .popup-direction-d .popup:after {
@@ -289,49 +256,36 @@ main.container .card audio {
     position: absolute;
     bottom: 100%;
     left: 50%;
-    transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-bottom-color: #fff;
-}
-
-.nightMode .popup-direction-d .popup:after,
-.ankidroid_dark_mode .popup-direction-d .popup:after {
-    border-bottom-color: #2c3e50;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
 }
 
 .popup-direction-l .popup:after {
     content: "";
     position: absolute;
-    left: 100%;
     top: 50%;
-    transform: translateY(-50%);
-    border: 5px solid transparent;
-    border-left-color: #fff;
-}
-
-.nightMode .popup-direction-l .popup:after,
-.ankidroid_dark_mode .popup-direction-l .popup:after {
-    border-left-color: #2c3e50;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
 }
 
 .popup-direction-r .popup:after {
     content: "";
     position: absolute;
-    right: 100%;
     top: 50%;
-    transform: translateY(-50%);
-    border: 5px solid transparent;
-    border-right-color: #fff;
-}
-
-.nightMode .popup-direction-r .popup:after,
-.ankidroid_dark_mode .popup-direction-r .popup:after {
-    border-right-color: #2c3e50;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #fff transparent transparent;
 }
 
 .popup-hover-box {
     position: absolute;
-    background: transparent;
     display: none;
 }
 
@@ -341,256 +295,245 @@ main.container .card audio {
 
 .popup-direction-u .popup-hover-box {
     bottom: 100%;
-    width: 100%;
-    height: 10px;
+    left: 0;
+    right: 0;
+    height: 5px;
 }
 
 .popup-direction-d .popup-hover-box {
     top: 100%;
-    width: 100%;
-    height: 10px;
+    left: 0;
+    right: 0;
+    height: 5px;
 }
 
 .popup-direction-l .popup-hover-box {
     right: 100%;
-    height: 100%;
-    width: 10px;
+    top: 0;
+    bottom: 0;
+    width: 5px;
 }
 
 .popup-direction-r .popup-hover-box {
     left: 100%;
-    height: 100%;
-    width: 10px;
+    top: 0;
+    bottom: 0;
+    width: 5px;
 }
 
-/* Part of Speech Styling */
-.word-pos {
+.word-pos-gender {
     font-size: 12px;
     color: #666;
     margin-left: 5px;
 }
 
-.ankidroid_dark_mode .word-pos,
-.nightMode .word-pos {
-    color: #bdc3c7;
+.word-pos {
+    font-size: 12px;
+    color: #888;
+}
+
+.word-gender-symbol-m::before {
+    content: "♂";
+    color: #00a2ff;
+}
+
+.word-gender-symbol-f::before {
+    content: "♀";
+    color: #ff69b4;
+}
+
+.word-gender-symbol-n::before {
+    content: "⚲";
+    color: #808080;
+}
+
+.word-gender-symbol-x::before {
+    content: "?";
+    color: #999;
 }
 
 .dict-form {
-    font-weight: bold;
-    margin-right: 5px;
+    font-style: italic;
+    color: #666;
 }
 
-.ankidroid_dark_mode .dict-form,
-.nightMode .dict-form {
-    color: #ecf0f1;
-}
-
-/* PART OF SPEECH FORMATTING - LIGHT MODE */
-/* Articles (der, die, das) - Italic */
-.pos-art,
+/* Masculine words - blue and bold */
 .gender-m,
-.gender-f,
-.gender-n,
-.card .pos-art,
+.gender-hover-m,
 .card .gender-m,
-.card .gender-f,
-.card .gender-n,
-.migaku-card .pos-art,
+.card .gender-hover-m,
+.card * .gender-m,
+.card * .gender-hover-m,
 .migaku-card .gender-m,
-.migaku-card .gender-f,
-.migaku-card .gender-n,
-.word-text.pos-art,
+.migaku-card .gender-hover-m,
+.migaku-card * .gender-m,
+.migaku-card * .gender-hover-m,
+.migaku-card-content .gender-m,
+.migaku-card-content .gender-hover-m,
+.migaku-card-content * .gender-m,
+.migaku-card-content * .gender-hover-m,
+main.container .card .gender-m,
+main.container .card .gender-hover-m,
+main.container .card * .gender-m,
+main.container .card * .gender-hover-m,
+span.gender-m,
+span.gender-hover-m,
 .word-text.gender-m,
-.word-text.gender-f,
-.word-text.gender-n {
-    font-style: italic;
-    font-weight: normal;
-    text-decoration: none;
-}
-
-/* Nouns - Bold */
-.pos-noun,
-.pos-n,
-.card .pos-noun,
-.card .pos-n,
-.migaku-card .pos-noun,
-.migaku-card .pos-n,
-.word-text.pos-noun,
-.word-text.pos-n {
-    font-weight: bold;
-    font-style: normal;
-    text-decoration: none;
-}
-
-/* Adjectives - Italic AND Bold */
-.pos-adj,
-.pos-a,
-.card .pos-adj,
-.card .pos-a,
-.migaku-card .pos-adj,
-.migaku-card .pos-a,
-.word-text.pos-adj,
-.word-text.pos-a {
-    font-style: italic;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* Verbs - Underlined */
-.pos-verb,
-.pos-v,
-.gender-v,
-.card .pos-verb,
-.card .pos-v,
-.card .gender-v,
-.migaku-card .pos-verb,
-.migaku-card .pos-v,
-.migaku-card .gender-v,
-.word-text.pos-verb,
-.word-text.pos-v,
-.word-text.gender-v {
-    text-decoration: underline;
-    font-style: normal;
-    font-weight: normal;
-}
-
-/* PART OF SPEECH FORMATTING - DARK MODE */
-/* Articles (der, die, das) - Italic */
-.ankidroid_dark_mode .pos-art,
-.ankidroid_dark_mode .gender-m,
-.ankidroid_dark_mode .gender-f,
-.ankidroid_dark_mode .gender-n,
-.ankidroid_dark_mode .card .pos-art,
-.ankidroid_dark_mode .card .gender-m,
-.ankidroid_dark_mode .card .gender-f,
-.ankidroid_dark_mode .card .gender-n,
-.ankidroid_dark_mode .migaku-card .pos-art,
-.ankidroid_dark_mode .migaku-card .gender-m,
-.ankidroid_dark_mode .migaku-card .gender-f,
-.ankidroid_dark_mode .migaku-card .gender-n,
-.ankidroid_dark_mode .word-text.pos-art,
-.ankidroid_dark_mode .word-text.gender-m,
-.ankidroid_dark_mode .word-text.gender-f,
-.ankidroid_dark_mode .word-text.gender-n,
-.nightMode .pos-art,
-.nightMode .gender-m,
-.nightMode .gender-f,
-.nightMode .gender-n,
-.nightMode .card .pos-art,
-.nightMode .card .gender-m,
-.nightMode .card .gender-f,
-.nightMode .card .gender-n,
-.nightMode .migaku-card .pos-art,
-.nightMode .migaku-card .gender-m,
-.nightMode .migaku-card .gender-f,
-.nightMode .migaku-card .gender-n,
-.nightMode .word-text.pos-art,
-.nightMode .word-text.gender-m,
-.nightMode .word-text.gender-f,
-.nightMode .word-text.gender-n {
-    font-style: italic;
-    font-weight: normal;
-    text-decoration: none;
-}
-
-/* Nouns - Bold */
-.ankidroid_dark_mode .pos-noun,
-.ankidroid_dark_mode .pos-n,
-.ankidroid_dark_mode .card .pos-noun,
-.ankidroid_dark_mode .card .pos-n,
-.ankidroid_dark_mode .migaku-card .pos-noun,
-.ankidroid_dark_mode .migaku-card .pos-n,
-.ankidroid_dark_mode .word-text.pos-noun,
-.ankidroid_dark_mode .word-text.pos-n,
-.nightMode .pos-noun,
-.nightMode .pos-n,
-.nightMode .card .pos-noun,
-.nightMode .card .pos-n,
-.nightMode .migaku-card .pos-noun,
-.nightMode .migaku-card .pos-n,
-.nightMode .word-text.pos-noun,
-.nightMode .word-text.pos-n {
-    font-weight: bold;
-    font-style: normal;
-    text-decoration: none;
-}
-
-/* Adjectives - Italic AND Bold */
-.ankidroid_dark_mode .pos-adj,
-.ankidroid_dark_mode .pos-a,
-.ankidroid_dark_mode .card .pos-adj,
-.ankidroid_dark_mode .card .pos-a,
-.ankidroid_dark_mode .migaku-card .pos-adj,
-.ankidroid_dark_mode .migaku-card .pos-a,
-.ankidroid_dark_mode .word-text.pos-adj,
-.ankidroid_dark_mode .word-text.pos-a,
-.nightMode .pos-adj,
-.nightMode .pos-a,
-.nightMode .card .pos-adj,
-.nightMode .card .pos-a,
-.nightMode .migaku-card .pos-adj,
-.nightMode .migaku-card .pos-a,
-.nightMode .word-text.pos-adj,
-.nightMode .word-text.pos-a {
-    font-style: italic;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* Verbs - Underlined */
-.ankidroid_dark_mode .pos-verb,
-.ankidroid_dark_mode .pos-v,
-.ankidroid_dark_mode .gender-v,
-.ankidroid_dark_mode .card .pos-verb,
-.ankidroid_dark_mode .card .pos-v,
-.ankidroid_dark_mode .card .gender-v,
-.ankidroid_dark_mode .migaku-card .pos-verb,
-.ankidroid_dark_mode .migaku-card .pos-v,
-.ankidroid_dark_mode .migaku-card .gender-v,
-.ankidroid_dark_mode .word-text.pos-verb,
-.ankidroid_dark_mode .word-text.pos-v,
-.ankidroid_dark_mode .word-text.gender-v,
-.nightMode .pos-verb,
-.nightMode .pos-v,
-.nightMode .gender-v,
-.nightMode .card .pos-verb,
-.nightMode .card .pos-v,
-.nightMode .card .gender-v,
-.nightMode .migaku-card .pos-verb,
-.nightMode .migaku-card .pos-v,
-.nightMode .migaku-card .gender-v,
-.nightMode .word-text.pos-verb,
-.nightMode .word-text.pos-v,
-.nightMode .word-text.gender-v {
-    text-decoration: underline;
-    font-style: normal;
-    font-weight: normal;
-}
-
-/* Target Word Highlighting */
-.target-word-highlight {
-    background-color: #fff3cd;
+.word-text.gender-hover-m {
+    color: #00a2ff !important;
+    text-shadow: 0 0 1px #00a2ff;
     border-radius: 3px;
-    padding: 2px 4px;
+    padding: 1px 2px;
+    font-weight: bold !important;
 }
 
-.migaku-card-front .target-word-highlight {
-    background-color: #d1ecf1;
-    color: #0c5460;
+/* Feminine words - pink and bold */
+.gender-f,
+.gender-hover-f,
+.card .gender-f,
+.card .gender-hover-f,
+.card * .gender-f,
+.card * .gender-hover-f,
+.migaku-card .gender-f,
+.migaku-card .gender-hover-f,
+.migaku-card * .gender-f,
+.migaku-card * .gender-hover-f,
+.migaku-card-content .gender-f,
+.migaku-card-content .gender-hover-f,
+.migaku-card-content * .gender-f,
+.migaku-card-content * .gender-hover-f,
+main.container .card .gender-f,
+main.container .card .gender-hover-f,
+main.container .card * .gender-f,
+main.container .card * .gender-hover-f,
+span.gender-f,
+span.gender-hover-f,
+.word-text.gender-f,
+.word-text.gender-hover-f {
+    color: #ff69b4 !important;
+    text-shadow: 0 0 1px #ff69b4;
+    border-radius: 3px;
+    padding: 1px 2px;
+    font-weight: bold !important;
 }
 
-.migaku-card-back .target-word-highlight {
-    background-color: #f8d7da;
-    color: #721c24;
+/* Neuter words - gray and bold */
+.gender-n,
+.gender-hover-n,
+.card .gender-n,
+.card .gender-hover-n,
+.card * .gender-n,
+.card * .gender-hover-n,
+.migaku-card .gender-n,
+.migaku-card .gender-hover-n,
+.migaku-card * .gender-n,
+.migaku-card * .gender-hover-n,
+.migaku-card-content .gender-n,
+.migaku-card-content .gender-hover-n,
+.migaku-card-content * .gender-n,
+.migaku-card-content * .gender-hover-n,
+main.container .card .gender-n,
+main.container .card .gender-hover-n,
+main.container .card * .gender-n,
+main.container .card * .gender-hover-n,
+span.gender-n,
+span.gender-hover-n,
+.word-text.gender-n,
+.word-text.gender-hover-n {
+    color: #808080 !important;
+    text-shadow: 0 0 1px #808080;
+    border-radius: 3px;
+    padding: 1px 2px;
+    font-weight: bold !important;
 }
 
-.ankidroid_dark_mode .target-word-highlight,
-.nightMode .target-word-highlight {
-    background-color: #495057;
-    color: #f8f9fa;
+/* Verbs - purple and italic */
+.gender-v,
+.gender-hover-v,
+.card .gender-v,
+.card .gender-hover-v,
+.card * .gender-v,
+.card * .gender-hover-v,
+.migaku-card .gender-v,
+.migaku-card .gender-hover-v,
+.migaku-card * .gender-v,
+.migaku-card * .gender-hover-v,
+.migaku-card-content .gender-v,
+.migaku-card-content .gender-hover-v,
+.migaku-card-content * .gender-v,
+.migaku-card-content * .gender-hover-v,
+main.container .card .gender-v,
+main.container .card .gender-hover-v,
+main.container .card * .gender-v,
+main.container .card * .gender-hover-v,
+span.gender-v,
+span.gender-hover-v,
+.word-text.gender-v,
+.word-text.gender-hover-v {
+    color: #9b59b6 !important;
+    text-shadow: 0 0 1px #9b59b6;
+    border-radius: 3px;
+    padding: 1px 2px;
+    font-style: italic !important;
 }
 
-/* Copyright */
+/* Adjectives - bold and italic */
+.pos-adj,
+.pos-hover-adj,
+.card .pos-adj,
+.card .pos-hover-adj,
+.card * .pos-adj,
+.card * .pos-hover-adj,
+.migaku-card .pos-adj,
+.migaku-card .pos-hover-adj,
+.migaku-card * .pos-adj,
+.migaku-card * .pos-hover-adj,
+.migaku-card-content .pos-adj,
+.migaku-card-content .pos-hover-adj,
+.migaku-card-content * .pos-adj,
+.migaku-card-content * .pos-hover-adj,
+main.container .card .pos-adj,
+main.container .card .pos-hover-adj,
+main.container .card * .pos-adj,
+main.container .card * .pos-hover-adj,
+span.pos-adj,
+span.pos-hover-adj,
+.word-text.pos-adj,
+.word-text.pos-hover-adj {
+    font-weight: bold !important;
+    font-style: italic !important;
+}
+
+/* All other non-gendered words - gray */
+.gender-missing,
+.gender-hover-missing,
+.card .gender-missing,
+.card .gender-hover-missing,
+.card * .gender-missing,
+.card * .gender-hover-missing,
+.migaku-card .gender-missing,
+.migaku-card .gender-hover-missing,
+.migaku-card * .gender-missing,
+.migaku-card * .gender-hover-missing,
+.migaku-card-content .gender-missing,
+.migaku-card-content .gender-hover-missing,
+.migaku-card-content * .gender-missing,
+.migaku-card-content * .gender-hover-missing,
+main.container .card .gender-missing,
+main.container .card .gender-hover-missing,
+main.container .card * .gender-missing,
+main.container .card * .gender-hover-missing,
+span.gender-missing,
+span.gender-hover-missing,
+.word-text.gender-missing,
+.word-text.gender-hover-missing {
+    color: #808080 !important;
+    text-shadow: 0 0 1px #808080;
+    border-radius: 3px;
+    padding: 1px 2px;
+}
+
+/* Copyright and branding */
 .migaku-copyright {
     text-align: center;
     font-size: 12px;
@@ -598,26 +541,4 @@ main.container .card audio {
     margin-top: 20px;
     padding: 10px;
     border-top: 1px solid #eee;
-}
-
-.ankidroid_dark_mode .migaku-copyright,
-.nightMode .migaku-copyright {
-    color: #bdc3c7;
-    border-top-color: #34495e;
-}
-
-/* Audio Controls */
-.replay-button {
-    cursor: pointer;
-}
-
-.playImage {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-}
-
-/* Responsive Typography */
-t {
-    font-size: inherit;
 }
