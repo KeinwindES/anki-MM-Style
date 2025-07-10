@@ -427,18 +427,18 @@ t {
     margin-top: 5px;
     font-size: 25px;
 }
-//syntax
-.syntax-nn,
-.word:active .syntax-hover-nn{
+//type
+.migaku-typeselect,
+.word:active .syntax-hover-n {
     text-wrap-style: italic;
 }
-.syntax-adj,
-.word:active .syntax-hover-adj{
+.syntax-adjective,
+.word:active .syntax-hover-adjective {
     text-wrap-style: italic;
     text-weight: bold;
 }
-.syntax-v,
-.word:active .syntax-hover-v{
+.syntax-verb,
+.word:active .syntax-hover-verb {
     text-weight: bold;
 }
 
@@ -462,7 +462,7 @@ t {
 
 // target word
 .target-word,
-.word:active{
+.word:active {
     text-decoration: underline;
 }
 
