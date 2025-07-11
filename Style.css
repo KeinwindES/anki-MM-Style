@@ -403,13 +403,16 @@ t {
     padding-right: 15px;
 }
 
+/* gender */
 .word-gender-symbol-m::before {
-    // bubblegum blue
+    content: "\2642";
+    /* bubblegum blue */
     color: #005ce6;
 }
 
 .word-gender-symbol-f::before {
-    // bubblegum pink colour;
+    content: "\2640";
+    /* bubblegum pink colour */
     color: #e60000;
 }
 
@@ -423,35 +426,15 @@ t {
     color: #ac80ff;
 }
 
-.dict-form {
-    margin-top: 5px;
-    font-size: 25px;
-}
-//type
-.migaku-typeselect,
-.word:active .syntax-hover-n {
-    text-wrap-style: italic;
-}
-.syntax-adjective,
-.word:active .syntax-hover-adjective {
-    text-wrap-style: italic;
-    text-weight: bold;
-}
-.syntax-verb,
-.word:active .syntax-hover-verb {
-    text-weight: bold;
-}
-
-//gender
 .gender-m,
 .word.active .gender-hover-m {
-    // bubblegum blue
+    /* bubblegum blue */
     color: #005ce6;
 }
 
 .gender-f,
 .word.active .gender-hover-f {
-    // bubblegum pink colour;
+    /* bubblegum pink colour */
     color: #e60000;
 }
 
@@ -460,10 +443,30 @@ t {
     color: #808080;
 }
 
-// target word
+/* target word */
 .target-word,
 .word:active {
     text-decoration: underline;
+}
+
+.dict-form {
+    margin-top: 5px;
+    font-size: 25px;
+}
+
+/* type */
+.type-noun,
+.word:active .syntax-hover-n {
+    font-style: italic;
+}
+.syntax-adjective,
+.word:active .syntax-hover-adjective {
+    font-style: italic;
+    font-weight: bold;
+}
+.syntax-verb,
+.word:active .syntax-hover-verb {
+    font-weight: bold;
 }
 
 /*###MIGAKU GERMAN SUPPORT CSS ENDS###*/
