@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: cardFont;
-    src: url("BeautifulPoliceOfficer-rvv8x.ttf");
+    src: url("/_NotoSerif.ttf");
 }
 
 body {
@@ -47,6 +47,24 @@ main.container .card audio {
     color: rgb(40, 40, 50);
     height: 100%;
     width: 100%;
+}
+
+.migaku-header {
+    background: #2880ff;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.migaku-header h1 {
+    color: white;
+}
+
+.migaku-logo {
+    height: 35px;
+    margin: 5px;
 }
 
 .migaku-card,
@@ -403,16 +421,13 @@ t {
     padding-right: 15px;
 }
 
-/* gender */
 .word-gender-symbol-m::before {
     content: "\2642";
-    /* bubblegum blue */
     color: #005ce6;
 }
 
 .word-gender-symbol-f::before {
     content: "\2640";
-    /* bubblegum pink colour */
     color: #e60000;
 }
 
@@ -426,15 +441,18 @@ t {
     color: #ac80ff;
 }
 
+.dict-form {
+    margin-top: 5px;
+    font-size: 25px;
+}
+
 .gender-m,
 .word.active .gender-hover-m {
-    /* bubblegum blue */
     color: #005ce6;
 }
 
 .gender-f,
 .word.active .gender-hover-f {
-    /* bubblegum pink colour */
     color: #e60000;
 }
 
@@ -442,31 +460,4 @@ t {
 .word.active .gender-hover-n {
     color: #808080;
 }
-
-/* target word */
-.target-word,
-.word:active {
-    text-decoration: underline;
-}
-
-.dict-form {
-    margin-top: 5px;
-    font-size: 25px;
-}
-
-/* type */
-.type-noun,
-.word:active .syntax-hover-n {
-    font-style: italic;
-}
-.syntax-adjective,
-.word:active .syntax-hover-adjective {
-    font-style: italic;
-    font-weight: bold;
-}
-.syntax-verb,
-.word:active .syntax-hover-verb {
-    font-weight: bold;
-}
-
 /*###MIGAKU GERMAN SUPPORT CSS ENDS###*/

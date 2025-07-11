@@ -83,7 +83,7 @@
 
 <!--###MIGAKU GERMAN SUPPORT JS STARTS###--><script>
 
-    function initializeGermanSupport() {
+    (function () {
 
         const word_pos_names = {
             v: "Verb",
@@ -355,16 +355,6 @@
                 elem.addEventListener('mouseleave', on_activeLeave)
             }
         }
-    }
-
-    // Wait for DOM to be ready and Anki content to be loaded
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(initializeGermanSupport, 100);
-        });
-    } else {
-        // DOM is already ready
-        setTimeout(initializeGermanSupport, 100);
-    }
+    }());
 </script>
 <!--###MIGAKU GERMAN SUPPORT JS ENDS###-->
