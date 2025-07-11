@@ -2,13 +2,13 @@
     <div class="migaku-card-content">
         {{^Is Audio Card}}
             {{^Is Vocabulary Card}}
-                <div class="field" data-popup="yes">{{editable:Sentence}}</div>
-                <div style='font-family: "Arial"; font-size: 20px;'>{{Target Word}}</div>
+                <div class="field" data-popup="yes" data-gender-coloring="yes" data-type-styling="yes">{{editable:Sentence}}</div>
+                <div class="field" data-popup="yes" data-gender-coloring="yes" data-type-styling="yes">{{editable:Target Word}}</div>
             {{/Is Vocabulary Card}}
         {{/Is Audio Card}}
         {{^Is Audio Card}}
             {{#Is Vocabulary Card}}
-                <div class="field" data-popup="yes">{{editable:Target Word}}</div>
+                <div class="field" data-popup="yes" data-gender-coloring="yes" data-type-styling="yes">{{editable:Target Word}}</div>
             {{/Is Vocabulary Card}}
         {{/Is Audio Card}}
         {{#Is Audio Card}}
@@ -25,8 +25,8 @@
 </div>
 
 
-<!--###MIGAKU GERMAN SUPPORT JS STARTS###--><script>
-
+<!--###MIGAKU GERMAN SUPPORT JS STARTS###-->
+<script>
     (function () {
 
         const word_pos_names = {
@@ -121,13 +121,18 @@
                 text_elem.textContent = syntax_element.text
                 text_elem.classList.add('word-text')
 
-                if (field_settings.gender_coloring !== 'no' && syntax_element.gender !== 'x') {
+                if (field_settings.gender_coloring !== 'no' && syntax_element.gender) {
                     let gender_class = 'gender-'
                     if (field_settings.gender_coloring === 'hover') {
                         gender_class += 'hover-'
                     }
                     gender_class += syntax_element.gender
                     text_elem.classList.add(gender_class)
+                }
+
+                // Add type-based styling
+                if (field_settings.type_styling !== 'no' && syntax_element.word_pos) {
+                    text_elem.classList.add('type-' + syntax_element.word_pos)
                 }
                 word_container.appendChild(text_elem)
 
@@ -190,7 +195,8 @@
         function handleField(field) {
             const field_settings = {
                 popup: field.getAttribute('data-popup') || 'no',
-                gender_coloring: field.getAttribute('data-gender-coloring') || 'no'
+                gender_coloring: field.getAttribute('data-gender-coloring') || 'no',
+                type_styling: field.getAttribute('data-type-styling') || 'no'
             }
 
             handleFieldTextNodes(field, field_settings)

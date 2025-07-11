@@ -9,8 +9,8 @@
             {{editable:Sentence Audio}}
         </div>
         <div class="migaku-card-sentence">
-            <div class="field" data-popup="yes" data-gender-coloring="yes">{{editable:Sentence}}</div>
-            <div style='font-family: "Arial"; font-size: 20px;'>{{Target Word}}</div>
+            <div class="field" data-popup="yes" data-gender-coloring="yes" data-type-styling="yes">{{editable:Sentence}}</div>
+            <div class="field" data-popup="yes" data-gender-coloring="yes" data-type-styling="yes">{{editable:Target Word}}</div>
         </div>
         <div class="migaku-card-translation">
             {{editable:Translation}}
@@ -22,14 +22,14 @@
             {{editable:Word Audio}}
         </div>
         <div class="migaku-card-unknown migaku-indented">
-            <div class="field" data-popup="yes" data-gender-coloring="yes">{{editable:Target Word}}</div>
+            <div class="field" data-popup="yes" data-gender-coloring="yes" data-type-styling="yes">{{editable:Target Word}}</div>
         </div>
 
         <div class="migaku-card-examples migaku-indented">
-            <div class="field" data-popup="yes" data-gender-coloring="yes">{{editable:Example Sentences}}</div>
+            <div class="field" data-popup="yes" data-gender-coloring="yes" data-type-styling="yes">{{editable:Example Sentences}}</div>
         </div>
         <div class="migaku-card-definitions migaku-indented">
-            <div class="field" data-popup="yes">{{editable:Definitions}}</div>
+            <div class="field" data-popup="yes" data-type-styling="yes">{{editable:Definitions}}</div>
         </div>
         <div class="migaku-card-images">
             {{editable:Images}}
@@ -178,13 +178,18 @@
                 text_elem.textContent = syntax_element.text
                 text_elem.classList.add('word-text')
 
-                if (field_settings.gender_coloring !== 'no' && syntax_element.gender !== 'x') {
+                if (field_settings.gender_coloring !== 'no' && syntax_element.gender) {
                     let gender_class = 'gender-'
                     if (field_settings.gender_coloring === 'hover') {
                         gender_class += 'hover-'
                     }
                     gender_class += syntax_element.gender
                     text_elem.classList.add(gender_class)
+                }
+
+                // Add type-based styling
+                if (field_settings.type_styling !== 'no' && syntax_element.word_pos) {
+                    text_elem.classList.add('type-' + syntax_element.word_pos)
                 }
                 word_container.appendChild(text_elem)
 
@@ -247,7 +252,8 @@
         function handleField(field) {
             const field_settings = {
                 popup: field.getAttribute('data-popup') || 'no',
-                gender_coloring: field.getAttribute('data-gender-coloring') || 'no'
+                gender_coloring: field.getAttribute('data-gender-coloring') || 'no',
+                type_styling: field.getAttribute('data-type-styling') || 'no'
             }
 
             handleFieldTextNodes(field, field_settings)
