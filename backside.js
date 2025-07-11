@@ -10,6 +10,7 @@
         </div>
         <div class="migaku-card-sentence">
             <div class="field" data-popup="yes" data-gender-coloring="yes">{{editable:Sentence}}</div>
+            <div style='font-family: "Arial"; font-size: 20px;'>{{Target Word}}</div>
         </div>
         <div class="migaku-card-translation">
             {{editable:Translation}}

@@ -446,6 +446,7 @@ t {
     font-size: 25px;
 }
 
+/* Gender */
 .gender-m,
 .word.active .gender-hover-m {
     color: #005ce6;
@@ -460,4 +461,24 @@ t {
 .word.active .gender-hover-n {
     color: #808080;
 }
+/* Type */
+.type-n,
+.word.active .type-hover-n {
+    /* bold text */
+    font-weight: bold;
+}
+
+.type-adj,
+.word.active .type-hover-adj {
+    /* bold text and italic */
+    font-weight: bold;
+    font-style: italic;
+}
+
+.type-v,
+.word.active .type-hover-v {
+    /* bold text */
+    font-style: italic;
+}
+
 /*###MIGAKU GERMAN SUPPORT CSS ENDS###*/

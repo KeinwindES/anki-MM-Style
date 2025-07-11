@@ -3,6 +3,7 @@
         {{^Is Audio Card}}
             {{^Is Vocabulary Card}}
                 <div class="field" data-popup="yes">{{editable:Sentence}}</div>
+                <div style='font-family: "Arial"; font-size: 20px;'>{{Target Word}}</div>
             {{/Is Vocabulary Card}}
         {{/Is Audio Card}}
         {{^Is Audio Card}}
@@ -22,6 +23,7 @@
         {{/Is Audio Card}}
     </div>
 </div>
+
 
 <!--###MIGAKU GERMAN SUPPORT JS STARTS###--><script>
 
