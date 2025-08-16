@@ -40,6 +40,21 @@ main.container .card audio {
     font-family: cardFont, sans-serif;
 }
 
+/* Target word styling */
+.target-word .word .word-text,
+.migaku-card-unknown .word .word-text {
+    text-decoration: underline;
+    text-decoration-color: rgba(40, 40, 50, 0.6);
+    text-underline-offset: 2px;
+}
+
+.ankidroid_dark_mode .target-word .word .word-text,
+.nightMode .target-word .word .word-text,
+.ankidroid_dark_mode .migaku-card-unknown .word .word-text,
+.nightMode .migaku-card-unknown .word .word-text {
+    text-decoration-color: rgba(245, 245, 255, 0.6);
+}
+
 .card {
     background: #e5f9ff;
     font-size: 18px;
@@ -186,15 +201,15 @@ main.container .card audio {
 }
 
 .ankidroid_dark_mode.card,
-.nightMode.card {
+.nightMode .card {
     color: rgb(245, 245, 255);
     background: #2b303b;
 }
 
 .ankidroid_dark_mode .migaku-card-translation,
-.nightMode.card .migaku-card-translation,
+.nightMode .migaku-card-translation,
 .ankidroid_dark_mode .migaku-card-examples,
-.nightMode.card .migaku-card-examples {
+.nightMode .migaku-card-examples {
     color: rgba(230, 230, 255, 0.65);
 }
 
@@ -227,37 +242,34 @@ t {
 
 @media (min-width: 762px) {
     .migaku-header {
-        justify-content: start;
+        justify-content: flex-start;
         padding-left: 20px;
     }
 }
 
 @media only screen and (max-width: 768px) {
-    /* For mobile phones: */
     .migaku-card,
     .migaku-typeselect {
         width: 96%;
     }
 }
 
-/*###MIGAKU GERMAN SUPPORT CSS STARTS###*/
+/* === MIGAKU GERMAN SUPPORT CSS === */
 .word {
     position: relative;
+    cursor: pointer;
 }
 
 .popup {
     visibility: hidden;
     position: absolute;
-
     z-index: 100;
-
     padding: 7px;
     border-radius: 5px;
-
     text-align: left;
-
     background-color: #e5f9ff;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    min-width: 120px;
 }
 
 .nightMode .popup,
@@ -467,18 +479,21 @@ t {
 }
 
 .type-pn {
-    /* proper nouns - bold */
     font-weight: bold;
 }
 
 .type-prep {
-    /* prepositions - underline */
     text-decoration: underline;
 }
 
 .type-art {
-    /* articles - small caps */
     font-variant: small-caps;
 }
 
-/*###MIGAKU GERMAN SUPPORT CSS ENDS###*/
+/* Improved word hover states */
+.word:hover .word-text {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+/* === MIGAKU GERMAN SUPPORT CSS ENDS === */
