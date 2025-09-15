@@ -443,51 +443,137 @@ t {
 /* Gender */
 .gender-m,
 .word.active .gender-hover-m {
-    color: #87ceeb;
+    color: #00bfff; /* Bubblegum Blue */
+    font-weight: bold;
 }
 
 .gender-f,
 .word.active .gender-hover-f {
-    color: #ff69b4;
+    color: #ff1493; /* Bubblegum Pink */
+    font-style: italic;
 }
 
 .gender-n,
 .word.active .gender-hover-n {
-    color: #98fb98;
+    color: #808080; /* Gray */
+    font-weight: bold;
+    font-style: italic;
 }
 
 .gender-x,
 .word.active .gender-hover-x {
-    color: #00cc00;
+    color: #ac80ff;
 }
 
 /* Type */
 .type-n {
-    /* bold text */
     font-weight: bold;
+    color: #4169e1; /* Royal Blue */
 }
 
 .type-adj {
-    /* bold text and italic */
     font-weight: bold;
     font-style: italic;
+    color: #32cd32; /* Lime Green */
 }
 
 .type-v {
-    /* bold text */
     font-style: italic;
+    color: #ff6347; /* Tomato Red */
 }
 
 .type-pn {
     font-weight: bold;
+    color: #8a2be2; /* Blue Violet */
 }
 
 .type-prep {
-    text-decoration: underline;
+    color: #ff8c00; /* Dark Orange */
 }
 
 .type-art {
     font-variant: small-caps;
+    color: #20b2aa; /* Light Sea Green */
+}
+
+.type-adv {
+    color: #da70d6; /* Orchid */
+}
+
+.type-cnum {
+    color: #daa520; /* Goldenrod */
+}
+
+.type-circ {
+    color: #cd853f; /* Peru */
+}
+
+.type-conj {
+    color: #dc143c; /* Crimson */
+}
+
+.type-demo {
+    color: #00ced1; /* Dark Turquoise */
+}
+
+.type-ind {
+    color: #9370db; /* Medium Purple */
+}
+
+.type-int {
+    color: #ff1493; /* Deep Pink */
+}
+
+.type-onum {
+    color: #ffd700; /* Gold */
+}
+
+.type-poss {
+    color: #ff69b4; /* Hot Pink */
+}
+
+.type-ppos {
+    color: #ffa500; /* Orange */
+}
+
+.type-per {
+    color: #40e0d0; /* Turquoise */
+}
+
+.type-prepart {
+    color: #ff7f50; /* Coral */
+}
+
+.type-proadv {
+    color: #ba55d3; /* Medium Orchid */
+}
+
+.type-part {
+    color: #7fffd4; /* Aquamarine */
+}
+
+.type-rel {
+    color: #98fb98; /* Pale Green */
+}
+
+.type-trunc {
+    color: #f0e68c; /* Khaki */
+}
+
+.type-vpart {
+    color: #fa8072; /* Salmon */
+}
+
+.type-advpro {
+    color: #dda0dd; /* Plum */
+}
+
+.type-pro {
+    color: #87cefa; /* Light Sky Blue */
+}
+
+.type-zu {
+    color: #f5deb3; /* Wheat */
 }
 
 /* Improved word hover states */

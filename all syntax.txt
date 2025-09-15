@@ -1,0 +1,34 @@
+Code   Meaning
+adj    Adjective
+adv    Adverb
+art    Article
+card   Cardinal number
+circp  Zirkumposition
+conj   Conjunction
+demo   Demonstrative
+indef  Indefinite pronoun
+intj   Interjection
+ord    Ordinal number
+nn     Noun
+nnp    Proper noun
+poss   Possessive
+postp  Postposition
+
+Code     Meaning
+prp      Personal pronoun
+prep     Preposition
+prepart  Preposition with article
+proadv   Pronominal adverb
+prtk1    Particle
+rel      Relative Pronoun
+trunc    Kompositions-Erstglied
+v        Verb
+vpart    Verb particle
+wpadv    Adverbial inter. pronoun
+wpro     Interrogative pronoun
+zu       Infinitive
+
+code    meaning     colour
+f       femi        pink
+m       masc        blue
+n       neut        grey
